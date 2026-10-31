@@ -345,7 +345,7 @@ let CMP=null;
 function mm(p){if(p._m)return p._m;const r=p.rows||0,lu=Date.parse(p.last_updated_on);
   return p._m={...p,dollarShare:r?p.dollar/r:0,pctShare:r?p.pctRows/r:0,zeroShare:r?p.zero/r:0,dupShare:r?p.dup/r:0,ageDays:lu?Math.floor((Date.now()-lu)/864e5):null}}
 async function renderReport(){
-  if(!CMP){let r;try{r=await jget('/api/compliance')}catch(e){r=null}if(!r||!r.plans){$('#rep-none').style.display='';$('#rep-none').textContent='Could not read the local data. Is the server running?';return}CMP=r}
+  if(!CMP){let r;try{r=await jget('/api/compliance')}catch(e){r=null}if(!r||!r.plans){$('#rep-none').style.display='';$('#rep-none').textContent=r&&r.error==='building'?'The data is still being built for the first time. This takes a few minutes; reload this page shortly.':'Could not read the local data. Is the server running?';return}CMP=r}
   const P=CMP.plans.map(mm);
   $('#rep-body').style.display=P.length?'':'none';$('#rep-none').style.display=P.length?'none':'';
   if(!P.length)return;
