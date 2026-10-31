@@ -1,0 +1,54 @@
+{
+ "_about": "Hand-checked additions to the automatic hospital matching. 'name' replaces the CMS display name (the CMS name is kept as 'aka' and stays searchable). 'tins' are tax IDs (TINs) to attach; each must exist in the plans with prices. 'why' says what the evidence is.",
+ "060024": {
+  "name": "UCHealth University of Colorado Hospital",
+  "why": "Display name only: CMS lists it as University Of Colorado Hospital Authority."
+ },
+ "060010": {
+  "name": "UCHealth Poudre Valley Hospital",
+  "why": "Display name only."
+ },
+ "060119": {
+  "name": "UCHealth Medical Center of the Rockies",
+  "why": "Display name only."
+ },
+ "060049": {
+  "tins": [
+   "840398876"
+  ],
+  "why": "NPI 1295177426 (Yampa Valley Medical Center, 1024 Central Park Dr) is listed under this tax ID."
+ },
+ "061302": {
+  "tins": [
+   "840447998"
+  ],
+  "why": "NPI 1861496697 (Lower Valley Hospital Association, 300 W Ottley Ave, the same address as Family Health West) is listed under this tax ID.",
+  "name": "Family Health West Hospital"
+ },
+ "060124": {
+  "tins": [
+   "840405257"
+  ],
+  "why": "NPI 1164430567 (Catholic Health Initiatives Colorado, 11600 W 2nd Pl, the OrthoColorado Hospital campus) is listed under this tax ID.",
+  "name": "OrthoColorado Hospital at St. Anthony Medical Campus"
+ },
+ "060100": {
+  "tins": [
+   "841321373"
+  ],
+  "why": "Operated by HCA HealthOne; this is the HCA-HealthOne LLC tax ID that Rose, Presbyterian/St. Luke's and Sky Ridge also file under. Shared.",
+  "name": "The Medical Center of Aurora"
+ },
+ "060009": {
+  "tins": [
+   "841103606"
+  ],
+  "why": "Operated by SCL Health (now Intermountain Health); SCL Health - Front Range Inc is its Front Range operator. Shared.",
+  "name": "Intermountain Health Lutheran Hospital"
+ },
+ "060034": {
+  "name": "Swedish Medical Center",
+  "tins_note": "matched automatically",
+  "why": "Display name only: CMS lists it as HCA-HealthOne dba Swedish Medical Center."
+ }
+}

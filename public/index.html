@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Colorado Hospital Prices (reported by payers)</title>
+<meta name="description" content="Compare what Colorado health insurers pay each hospital for a procedure, using the negotiated rates insurers publish under the federal Transparency in Coverage rule.">
+<meta name="theme-color" content="#1d5fd1">
+<meta property="og:title" content="Colorado Hospital Prices (reported by payers)"><meta property="og:type" content="website">
+<meta property="og:description" content="Negotiated prices by Colorado insurer and hospital, from the insurers’ own published files.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d5fd1'/%3E%3Cpath d='M16 6v20M6 16h20' stroke='%23fff' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css" integrity="sha512-mQ77VzAakzdpWdgfL/lM1ksNy89uFgibRQANsNneSTMD/bj0Y/8+94XMwYhnbzx8eki2hrbPpDm0vD0CiT2lcg==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css" integrity="sha512-6ZCLMiYwTeli2rVh3XAPxy3YoR5fVxGdH/pz+KMCzRY2M65Emgkw00Yqmhh8qLGeYQ3LbVZGdmOX9KUjSKr0TA==" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js" integrity="sha512-OFs3W4DIZ5ZkrDhBFtsCP6JXtMEDGmhl0QPlmWYBJay40TT1n3gt2Xuw8Pf/iezgW9CdabjkNChRqozl/YADmg==" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+#toast{display:none;position:fixed;left:50%;bottom:18px;transform:translateX(-50%);max-width:90vw;background:#18202c;color:#fff;padding:10px 16px;border-radius:10px;z-index:999;font-size:14px;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.stars{color:#e0a100;letter-spacing:2px;font-size:17px}.stars .off{color:#d4d7de}
+.tips{margin:8px 0;font-size:14px}.tips summary{color:var(--acc);font-weight:600;cursor:pointer}.tips ul{margin:6px 0 0 18px;padding:0}
+.skip{position:absolute;left:-999px;top:0;background:#fff;padding:8px 12px;z-index:99}.skip:focus{left:8px;top:8px}
+:focus-visible{outline:3px solid #7aa7f0;outline-offset:2px}
+line[data-k]:focus-visible{outline:none;stroke:#18202c}
+.hmap{height:420px;border-radius:12px;border:1px solid var(--line);margin:14px 0;z-index:0}#pmap{height:230px;border-radius:10px;border:1px solid var(--line);margin-top:10px}
+.leaflet-popup-content button{font:inherit;margin-top:6px;padding:5px 10px;border:0;border-radius:8px;background:var(--acc);color:#fff;cursor:pointer}
+:root{--bg:#f4f5f8;--card:#fff;--ink:#18202c;--mut:#667085;--line:#e3e7ee;--acc:#1d5fd1;--accbg:rgba(29,95,209,.09);--ok:#157f4b;--warn:#b54708;--bad:#b42318}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,sans-serif}
+.wrap{max-width:1120px;margin:auto;padding:0 16px}
+header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.top{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 0 0;flex-wrap:wrap}
+h1{margin:0;font-size:19px;letter-spacing:-.2px}h1 small{display:block;font-size:12.5px;font-weight:400;color:var(--mut);letter-spacing:0}
+nav{display:flex;gap:2px;overflow-x:auto}
+nav button{background:none;border:0;padding:10px 14px;color:var(--mut);cursor:pointer;font:inherit;border-bottom:2px solid transparent;white-space:nowrap}
+nav button.on{color:var(--acc);border-color:var(--acc);font-weight:600}
+main{padding-top:18px;padding-bottom:60px}
+h2{font-size:17px;margin:22px 0 4px}h2:first-child{margin-top:0}.sub{color:var(--mut);margin:0 0 12px;font-size:13.5px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+input,select,button.b{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+button.b{cursor:pointer;background:var(--acc);color:#fff;border-color:var(--acc)}button.b.alt{background:none;color:var(--acc)}button.b.sm{padding:3px 9px;font-size:13px}
+button.b:disabled{opacity:.5;cursor:default}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600;font-size:12.5px;white-space:nowrap}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.scroll{overflow:auto}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}.mut{color:var(--mut)}
+.s{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}.s i{width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}
+.pill{display:inline-block;padding:1px 8px;border-radius:99px;font-size:12px;border:1px solid var(--line)}
+.tab{display:none}.tab.on{display:block}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:0 0 14px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}.kpi b{display:block;font-size:24px;letter-spacing:-.5px}.kpi span{color:var(--mut);font-size:12.5px}
+.lede{font-size:16px;line-height:1.55;margin:0 0 14px}
+.empty{text-align:center;padding:48px 16px}.empty h2{margin-top:0}
+.kgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.kcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}.kcard h4{margin:0 0 2px;font-size:14.5px}.kcard .code{color:var(--mut);font-size:12px;margin-bottom:8px}
+.krow{display:grid;grid-template-columns:minmax(90px,38%) 1fr 62px;gap:8px;align-items:center;font-size:12.5px;margin:5px 0}
+.track{position:relative;height:10px;background:var(--line);border-radius:5px}.track .r{position:absolute;top:0;height:10px;background:var(--acc);opacity:.55;border-radius:5px}.track .m{position:absolute;top:-3px;width:3px;height:16px;background:var(--ink);border-radius:2px}
+.krow .l{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gap{margin-top:8px;font-size:12.5px;color:var(--mut)}
+.chip{font:inherit;font-size:13px;padding:3px 10px;border:1px solid var(--line);border-radius:99px;background:none;color:var(--ink);cursor:pointer}.chip:hover{border-color:var(--acc);color:var(--acc)}
+.drop{border:2px dashed var(--line);border-radius:10px;padding:14px;text-align:center;color:var(--mut)}.drop.hov{border-color:var(--acc)}
+.grp{margin:0 0 4px;font-weight:600}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:14px;align-items:start}
+.pane{max-height:calc(100vh - 250px);min-height:260px;overflow:auto;margin:0;position:sticky;top:112px}
+#list tr[data-i]{cursor:pointer}#list tr[data-i]:hover td{background:rgba(127,127,127,.08)}#list tr.sel td{background:var(--accbg)}
+#list th{position:sticky;top:-16px;background:var(--card)}
+.dhead{position:sticky;top:-16px;background:var(--card);padding:16px 0 8px;margin-top:-16px;z-index:1}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:12px 0}
+.stat{border:1px solid var(--line);border-radius:8px;padding:8px 10px}.stat b{display:block;font-size:18px}.stat span{color:var(--mut);font-size:12px}
+.bar{height:10px;background:var(--acc);border-radius:5px;opacity:.8}
+.close{display:none}
+code{font-size:12.5px}
+ul.m{padding-left:18px}ul.m li{margin:5px 0}
+/* progress */
+.pbar{height:8px;background:var(--line);border-radius:4px;overflow:hidden}.pbar i{display:block;height:100%;width:0;background:var(--acc);transition:width .25s}
+#insurers td{vertical-align:middle}#insurers .stc{min-width:210px}
+tr.grp td{background:rgba(127,127,127,.07)}tr.sub td{font-size:13px}
+@media(max-width:800px){
+  .split{grid-template-columns:1fr}.pane{position:static;max-height:60vh}
+  #detail{display:none}#detail.open{display:block;position:fixed;inset:0;max-height:none;z-index:20;border-radius:0;padding:16px}
+  .close{display:inline-block;float:right}
+  #list td:nth-child(3),#list th:nth-child(3),#list td:nth-child(5),#list th:nth-child(5){display:none}
+}
+/* ---- busy feedback: while anything loads the pointer shows a wait icon and search boxes show a spinner ---- */
+html.busy,html.busy *{cursor:progress!important}
+.sbox.loading::after{content:'';position:absolute;right:18px;top:26px;width:20px;height:20px;border:3px solid #cbd5e1;border-top-color:var(--acc);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* ---- finder pieces ---- */
+.datanote{text-align:center;color:var(--mut);font-size:13px;margin:22px 0 4px}.datanote b{color:var(--ink)}
+#gbar{display:none;height:3px;background:var(--line)}#gbar i{display:block;height:100%;width:0;background:var(--acc);transition:width .2s}
+.sbox{position:relative}.sugg{position:absolute;left:0;right:0;top:calc(100% - 8px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:6;overflow:hidden;max-height:60vh;overflow-y:auto}
+.sugg div{padding:10px 16px;cursor:pointer;border-top:1px solid #f3f4f6}.sugg div.hl,.sugg div:hover{background:#f3f4f6}.sugg small{display:block;color:var(--mut)}.sugg .sh{font-size:12px;font-weight:700;color:var(--mut);background:#f9fafb;cursor:default;border:0}
+.center2{text-align:center;line-height:2;font-weight:600}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.chip.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.split2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}@media(max-width:800px){.split2{grid-template-columns:1fr}}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}#t-find.deep>.lede{display:none}@media(max-width:800px){#pmap{height:170px}.hmap{height:340px}}#t-find>.lede{margin-top:20px!important}@media(max-width:800px){.info{grid-template-columns:1fr}}
+.nm2{font-family:Poppins,Inter,sans-serif;font-weight:700;font-size:20px}
+table.kv th{width:42%;text-align:left;color:var(--acc);font-size:12px;text-transform:uppercase;border-bottom:1px solid var(--line)}table.kv td{border-bottom:1px solid var(--line)}
+#loadcard.done{padding:10px 20px}#loadcard.done .pbar,#loadcard.done #alltxt{display:none}
+/* ---- price line charts ---- */
+.tip{position:fixed;z-index:50;pointer-events:none;background:#111827;color:#fff;border-radius:10px;padding:8px 12px;font-size:13px;line-height:1.45;max-width:320px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.tip .mut{color:#cbd5e1}.tip i{color:#93c5fd}
+svg.dots line[data-k]{cursor:pointer}svg.dots line[data-k]:hover,svg.dots line[data-k].sel{stroke:#111827;stroke-width:6}
+svg.dots line[data-k]:focus{outline:none;stroke:#111827;stroke-width:6}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin:6px 0}.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+.dd{display:none;margin-top:10px;border-top:1px solid var(--line);padding-top:10px}.dd.on{display:block}.dd h4{margin:0 0 6px;font-size:16px;font-family:Poppins,Inter,sans-serif}
+/* ---- theme: clean white, Inter + Poppins, blue/red accents (modeled on the Colorado Hospital Price Finder look) ---- */
+:root{--bg:#f9fafb;--card:#fff;--ink:#111827;--mut:#4b5563;--line:#e5e7eb;--acc:#2563eb;--accbg:rgba(37,99,235,.08);--red:#b93a32;--ok:#15803d;--warn:#b45309;--bad:#b91c1c}
+body{font:16px/1.55 Inter,system-ui,sans-serif}
+h1,h2,h3,.kpi b,.stat b{font-family:Poppins,Inter,sans-serif}
+header{position:static;background:#fff;border-bottom:1px solid var(--line)}
+.top{flex-direction:column;justify-content:center;padding:18px 0 4px;text-align:center}
+h1{font-size:26px;font-weight:700;letter-spacing:0}h1 .b1{color:var(--acc)}h1 .b2{color:var(--red)}
+h1 small{margin-top:4px;font-size:14px;color:var(--mut);font-family:Inter,sans-serif}
+.top>.row{position:absolute;right:16px;top:12px}#loadcard.done #loadmsg{display:none}
+nav{justify-content:center;border-top:1px solid var(--line);margin-top:12px}
+nav button{font-size:15px;padding:12px 18px}nav button.on{color:var(--acc);border-color:var(--acc)}
+main{padding-top:28px}
+h2{font-size:30px;line-height:1.15;font-weight:700;margin:34px 0 8px;letter-spacing:-.4px}
+h2:first-child{margin-top:0}
+.sub{font-size:16px;color:var(--mut);max-width:760px}
+.card,.kpi,.kcard{border-radius:16px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.04)}
+.card{padding:20px}.card.scroll{padding:0}
+input,select{border:1.5px solid #9ca3af;border-radius:10px;padding:11px 14px}
+input:focus,select:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px var(--accbg)}
+#q{border:2px solid var(--ink);border-radius:12px;font-size:17px;padding:14px 16px}
+button.b{border-radius:999px;padding:10px 20px;font-weight:600}button.b.sm{padding:4px 12px}
+.chip{border-radius:999px;color:var(--acc);border-color:#bfdbfe;background:#eff6ff}
+th{text-transform:none;font-size:13px;color:var(--mut);background:#f9fafb}
+#insurers tr.grp td{background:#f3f4f6}#insurers tr.grp td:first-child b{font-size:17px}
+a,.link{color:var(--acc)}
+.pbar{height:10px;border-radius:5px;background:#e5e7eb}.pbar i{background:linear-gradient(90deg,var(--acc),#60a5fa)}
+.kpi b{font-size:28px}
+footer.site{margin-top:40px;padding:28px 0 40px;border-top:1px solid var(--line);color:var(--mut);font-size:13.5px;text-align:center}
+footer.site p{max-width:820px;margin:8px auto}
+@media(max-width:800px){nav{justify-content:flex-start;scrollbar-width:none}nav::-webkit-scrollbar{display:none}nav button{padding:11px 11px;font-size:14px}h1{font-size:21px}h2{font-size:24px}.top>.row{display:none}.card{padding:14px}}
+h2.center{text-align:center}
+input.big{width:100%;border:2px solid var(--ink);border-radius:12px;font-size:18px;padding:16px 18px;margin:6px 0 14px}
+.icard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 20px;margin-bottom:10px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.icard:hover{border-color:var(--acc)}.icard .nm{color:var(--acc);font-weight:700;font-size:20px;text-decoration:underline;font-family:Poppins,Inter,sans-serif}
+.icard.dis{cursor:default;background:#f9fafb}.icard.dis:hover{border-color:var(--line)}.icard.dis .nm{color:var(--mut);text-decoration:none}
+.back{background:none;border:0;color:var(--acc);text-decoration:underline;font:inherit;cursor:pointer;padding:0;margin-bottom:10px}
+.svcrow{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+details>summary{cursor:pointer}
+@media print{
+  header .top button,nav,.noprint,.b{display:none!important}header{position:static;border:0}
+  body{background:#fff;color:#000}.card,.kpi,.kcard{break-inside:avoid;border-color:#ccc}.tab{display:none!important}.tab.on{display:block!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<noscript><p style="padding:16px">This tool needs JavaScript to show prices.</p></noscript>
+<header><div class="wrap">
+  <div class="top">
+    <h1><span class="b1">Colorado</span> <span class="b2">Hospital</span> <span class="b1">Prices</span> <span class="b1" style="font-weight:400;font-size:.6em">(reported by payers)</span><small>Compare what Colorado health insurers pay each hospital.</small></h1>
+    <div class="row noprint"><span class="mut" id="stamp"></span><button class="b alt sm" id="printbtn">Print / save PDF</button></div>
+  </div>
+  <nav id="nav"></nav>
+  
+</div></header>
+
+<main class="wrap" id="main" tabindex="-1">
+
+<section class="tab" id="t-find">
+  <p class="lede" style="text-align:center;max-width:680px;margin:0 auto 18px;font-size:17px"><b>Find what</b> Colorado health insurers pay a hospital for a service, from the negotiated rates they publish under the federal Transparency in Coverage rule.</p>
+  
+  <div id="finder">
+    <h2 class="center">Find prices at a hospital</h2>
+    <div class="sbox"><input id="isearch" class="big" aria-label="Search hospitals by name, city or zip" role="combobox" aria-expanded="false" aria-controls="sugg" placeholder="Enter hospital name, city or zip…" autocomplete="off"><div class="sugg" id="sugg" style="display:none"></div></div>
+    <p class="center2"><a href="#" id="lnk-all">View all hospitals</a><br><a href="#" id="lnk-common">Price comparisons for common procedures</a></p>
+    <div id="hmap" class="hmap"></div>
+    <div id="ilist" style="display:none"></div>
+    <div class="datanote" id="loadcard"><b id="loadtitle">Loading…</b><br><span id="dstat"></span> <a href="#" id="lnk-src">See sources</a></div>
+  </div>
+  <div id="iview" style="display:none"></div>
+  
+  </section>
+<section class="tab" id="t-report">
+  <h2>Reports</h2>
+  <p class="sub">How complete and consistent each plan’s data is.</p>
+  
+  <p class="mut" id="rep-none">Loading…</p>
+  <div id="rep-body" style="display:none">
+    <p class="lede" id="lede"></p>
+    <div class="kpis" id="kpis"></div>
+
+    <h2>By insurer</h2>
+    <p class="sub">Each insurer's plans added together. Colored marks follow the thresholds in <a href="#method">Method</a>.</p>
+    <div class="card scroll" style="padding:0"><table id="byins"></table></div>
+    <details style="margin-top:8px"><summary class="mut" style="cursor:pointer;font-size:13px">Details: what the columns mean</summary>
+    <ul class="mut" style="font-size:13px;margin:8px 0 0;padding-left:18px;line-height:1.5">
+      <li><b>Dollar prices</b>: share of price rows given as a dollar amount. Higher is better.</li>
+      <li><b>% of charges</b>: share of rows given as a percent of the hospital's billed charges, so there is no dollar price to compare.</li>
+      <li><b>$0 rows</b> and <b>Duplicate rows</b>: rows with a price of $0, and rows that repeat an earlier one.</li>
+      <li><b>Key services found</b>: how many of 9 common services have a dollar price.</li>
+      <li><b>Format checks passed</b>: checks of the file's structure and values (required fields, date format, valid codes). It does not judge whether prices are accurate.</li>
+    </ul>
+    </details>
+
+    <h2>Key services across insurers</h2>
+    <p class="sub">Median negotiated dollar price per plan (bar = lowest to highest rate in the plan, tick = median). Medians mix different providers, so they show patterns, not like-for-like prices.</p>
+    <div class="kgrid" id="kgrid"></div>
+
+    <div class="row noprint" style="margin-top:16px">
+      <button class="b" id="dl-score">Download scorecard CSV</button>
+      <button class="b alt" id="dl-key">Download key-service CSV</button>
+    </div>
+  </div>
+
+  
+</section>
+
+<section class="tab" id="t-sources">
+  <h2>Sources</h2>
+  <p class="sub">Source of the plan list: <a href="https://doi.colorado.gov/transparency-in-coverage" target="_blank" rel="noopener">Colorado Division of Insurance, Transparency in Coverage</a>. Every plan comes from the insurer’s own published in-network rates. The server downloads them, stores them in <code>data/raw</code> and builds a local database, then repeats about every quarter. Insurers publish new data each January and July.</p>
+  <div class="card scroll" style="padding:0"><table id="srcplans"><tr><th>Insurer</th><th>Plan</th><th class="n">Size</th><th>Updated by insurer</th><th class="n">Negotiated prices</th><th>Original source</th></tr></table></div>
+  <div class="mut" id="srcnote" style="font-size:13px;margin:8px 0 18px"></div>
+  <p class="mut" style="font-size:13px">Reports, All prices and Plan rates are calculated once per refresh from these plans and stored in the local database, so those tabs open instantly.</p>
+  <p class="mut" style="font-size:13px">Not included yet: most UnitedHealthcare plans (only one small plan is included, from UnitedHealthcare's own site) and the larger Anthem plans (up to 213 MB).</p>
+</section>
+
+<section class="tab" id="t-prices">
+  <h2>All prices</h2>
+  <p class="sub">Rows are services, columns are plans, cells are medians of negotiated dollar prices.</p>
+  <div class="card">
+    <div class="row">
+      <input id="mq" placeholder="Filter by code or description" style="flex:1;min-width:180px">
+      <select id="mcls"><option value="">All billing classes</option><option>professional</option><option>institutional</option></select>
+      <label><input type="checkbox" id="mfee" checked> Dollar rates only (no percentages)</label>
+      <button class="b alt" id="mkey">Key services</button>
+      <button class="b" id="mcsv">Download CSV</button>
+    </div>
+    <p class="mut" id="mnote" style="margin:8px 0 0"></p>
+  </div>
+  <div class="card scroll" style="max-height:70vh" id="mxout"></div>
+</section>
+
+<section class="tab" id="t-explore">
+  <div class="card">
+    <div class="row" style="margin-bottom:10px"><b>Plan</b><select id="filesel" style="min-width:240px"></select><span id="src" class="mut"></span></div>
+    <div class="row" id="chips" style="margin-bottom:10px"></div>
+    <div class="row">
+      <input id="q" placeholder="Search code or description (e.g. 99213, MRI)" style="flex:1;min-width:200px">
+      <select id="net"><option value="">All networks</option></select>
+      <select id="cls"><option value="">All billing classes</option><option>professional</option><option>institutional</option></select>
+    </div>
+  </div>
+  <div class="split">
+    <div class="card pane" id="list"><span class="mut">Loading…</span></div>
+    <div class="card pane" id="detail"><p class="mut">Select an item to see its price breakdown across providers.</p></div>
+  </div>
+</section>
+
+
+
+<section class="tab" id="t-method">
+  <h2>Method</h2>
+  <div class="card">
+    <h3 style="margin-top:0">How to read the prices</h3>
+    <ul class="m">
+      <li><b>Negotiated rate</b>: the amount an insurer has agreed to pay a hospital for a service. It is not your bill. Your cost depends on your deductible, copay or coinsurance, and on whether the hospital is in your plan’s network.</li>
+      <li><b>Facility and professional fees</b>: a hospital stay or procedure is often billed twice, once for the hospital’s facility fee (“institutional”) and once for the doctor’s professional fee. Use the billing-type buttons so you compare like with like.</li>
+      <li><b>Colors on the price lines</b>: green is a lower price, blue a middle price and red a higher price, compared with the median for this hospital (or, on a service page, for all hospitals).</li>
+      <li><b>Where the prices come from</b>: the in-network rate data that insurers must publish under the federal Transparency in Coverage rule, downloaded and stored locally, then rebuilt about every quarter. Nothing is estimated or filled in.</li>
+      <li><b>Hospitals</b>: the hospital list is from CMS Care Compare. A hospital appears only if its tax IDs or NPIs can be found in an insurer’s data. Rates are filed under tax IDs, which can also cover clinics and doctors who bill under the hospital.</li>
+      <li><b>Insurer data versus hospital price lists</b>: hospitals publish their own price lists with a charge for each insurer. Those can differ from the rates the insurers publish, because insurers file by tax ID (including physicians who bill under a hospital) and use different billing codes. This tool shows the insurer side only.</li>
+      <li><b>What is missing</b>: most UnitedHealthcare plans (one small plan is included) and the largest Anthem plans are not included yet, hospital cash and gross prices are not shown, and a hospital with no dollar price for a service simply has no dot.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">What the app measures</h3>
+    <ul class="m">
+      <li><b>Dollar share</b>: price rows with a dollar rate above zero (fee schedule, negotiated, derived or per diem) divided by all price rows. A plan is marked sufficient at 50% or more. This borrows the "pricing data sufficiency" idea Patient Rights Advocate uses for hospital data, where over half of negotiated charges must be dollars and cents.</li>
+      <li><b>Percentage share</b>: rows expressed as a percentage of billed charges. They cannot be compared across insurers without charge data, so they are left out of all price statistics.</li>
+      <li><b>Zero-dollar rows</b>: rates at or below zero. Marked good at 0%, caution under 1%, poor above.</li>
+      <li><b>Repeated rows</b>: share of price rows whose code, rate and billing class already appeared earlier in the same plan. High values point to the duplication that makes these plans large. Informational only.</li>
+      <li><b>Key services</b>: how many of the nine services (knee replacement, C-section, brain MRI, abdomen/pelvis CT with and without contrast, upper GI endoscopy with biopsy, laparoscopic cholecystectomy, metabolic panel, lipid panel) have at least one dollar rate. Good at 7 or more, caution at 4 to 6.</li>
+      <li><b>Schema checks</b>: structure and value checks against the in-network rate format required by the currently enforced rule (45 CFR 147.211 and the parallel Labor and Treasury rules), using the CMS v2.x JSON schema. Good when all pass, caution when two or fewer fail.</li>
+      <li><b>Age</b>: days since the plan's <code>last_updated_on</code>. Marked caution after 190 days (Colorado asks for state plans every six months).</li>
+    </ul>
+    <h3>Why Colorado plans are smaller</h3>
+    <p class="mut" style="margin-top:0">From the Division of Insurance's technical guide (<a href="https://github.com/ColoradoDOIData/Colorado-Transparency-in-Coverage" target="_blank" rel="noopener">GitHub</a>):</p>
+    <ul class="m">
+      <li>Only plans issued or delivered in Colorado, and only providers whose group or billing NPI has a Colorado zip code.</li>
+      <li>In-network rates only for procedure codes billed by a tax ID (TIN) with at least 20 services in the last year.</li>
+      <li>Provider data must be inline in each plan; separate provider sub-plans are not allowed except through the table of contents. A shared provider reference list is optional.</li>
+      <li>Insurers refresh the plans each January 1 and July 1, post a Colorado-specific page with no login or expiring links, and email the Division a list of URLs.</li>
+      <li>Insurers with fewer than 30 enforced policies are exempt.</li>
+    </ul>
+    <p class="mut">I could not confirm whether every example plan in this app follows these filters, and the app does not test for them yet.</p>
+    <h3>Limits</h3>
+    <ul class="m">
+      <li>A rate plan belongs to a network or plan group, not to one named plan. Plan names appear only when the insurer includes them in the plan header.</li>
+      <li>Medians pool all providers in a plan. The same service can look cheaper in one plan only because that plan has different providers.</li>
+      <li>Some plans (Select Health, Aetna) are single provider contracts or subsets, so their coverage numbers are not comparable to a full network plan.</li>
+      <li>Allowed values in the schema checks were written from memory of the CMS schema and should be confirmed against the published schema before a report is released.</li>
+      <li>Insurer links expire or move. Cigna's links are signed and expire around mid 2027.</li>
+    </ul>
+  </div>
+</section>
+</main>
+<footer class="site"><div class="wrap">
+  <p>Insurers and plans are identified from the <a href="https://doi.colorado.gov/transparency-in-coverage" target="_blank" rel="noopener">Colorado Division of Insurance Transparency in Coverage page</a>. Data comes from the in-network rate data that insurers publish under the federal Transparency in Coverage rule. Prices are negotiated amounts between insurer and provider, not what you will pay. Always verify with your insurer and the hospital.</p>
+  <p>This tool is for information only and is not medical, legal or financial advice. Negotiated rates are not what you will pay: your cost depends on your plan, deductible and coinsurance. Confirm prices with your insurer and the hospital before care. Data is reproduced as published and may contain errors.</p>
+  <p>CPT® codes are copyright American Medical Association. This is an independent research tool, not affiliated with any insurer, hospital or advocacy group. Hospital details: CMS Care Compare. Maps © OpenStreetMap contributors. <a href="#sources" onclick="show('sources');return false">Data sources</a> · This site uses no cookies, accounts or analytics. Searches stay between your browser and this server.</p>
+</div></footer>
+
+<script>
+let hashLock=false,lastHash=null,HMAP=null,HMK=null,HALL=[],view='home',selProv=null,svc='';
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const money=n=>n==null||!isFinite(n)?'—':'$'+Number(n).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+const money0=n=>n==null||!isFinite(n)?'—':'$'+Math.round(n).toLocaleString();
+const pct=(a,p)=>{if(!a.length)return null;const s=[...a].sort((x,y)=>x-y),i=(s.length-1)*p,lo=Math.floor(i);return s[lo]+(s[Math.ceil(i)]-s[lo])*(i-lo)};
+const fmt=n=>Number(n).toLocaleString();
+const pc1=x=>(x*100).toFixed(x>0&&x<.001?2:x<.1?1:0)+'%';
+const kb=b=>b>=1048576?(b/1048576).toFixed(1)+' MB':Math.max(1,Math.round(b/1024))+' KB';
+const dot=(lvl,t)=>`<span class="s ${lvl}"><i></i><span class="ink" style="color:var(--ink)">${t}</span></span>`;
+
+/* ---------- navigation ---------- */
+const TABS=[['report','Reports'],['find','Find prices'],['prices','All prices'],['explore','Plan rates'],['sources','Sources'],['method','Method']];
+$('#nav').innerHTML=TABS.map(([k,l])=>`<button data-k="${k}">${l}</button>`).join('');
+const ONSHOW={report:()=>renderReport(),prices:()=>renderMx(),explore:()=>renderExplore()};
+let shown={};
+let curTab='find';
+function show(k){curTab=k;setTimeout(setHash,0);if(ONSHOW[k]&&!shown[k]){shown[k]=1;setTimeout(()=>{ONSHOW[k]();},0)}if(k==='explore'&&!EXP.init)setTimeout(renderExplore,0);
+  document.querySelectorAll('.tab').forEach(e=>e.classList.toggle('on',e.id==='t-'+k));
+  document.querySelectorAll('nav button').forEach(b=>{b.classList.toggle('on',b.dataset.k===k);b.setAttribute('aria-current',b.dataset.k===k?'page':'false')});if(k!=='find')document.title=TABS.find(t=>t[0]===k)[1]+' · Colorado Hospital Prices (reported by payers)';window.scrollTo(0,0);if(k==='find'&&HMAP)setTimeout(()=>HMAP.invalidateSize(),50)}
+$('#nav').onclick=e=>e.target.dataset.k&&show(e.target.dataset.k);
+$('#printbtn').onclick=()=>print();
+
+show('report');
+
+/* ---------- precomputed analysis: Reports, All prices and Plan rates read the local database through /api ---------- */
+const KEY=[['CPT','27447','Knee replacement'],['CPT','59510','C-section delivery'],['CPT','70553','Brain MRI, without and with contrast'],['CPT','74177','CT abdomen + pelvis, with contrast'],['CPT','74176','CT abdomen + pelvis, without contrast'],['CPT','43239','Upper GI endoscopy with biopsy'],['CPT','47562','Laparoscopic gallbladder removal'],['CPT','80053','Comprehensive metabolic panel'],['CPT','80061','Lipid panel']];
+function download(name,lines){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/csv'}));a.download=name;a.click()}
+const q=s=>'"'+String(s??'').replace(/"/g,'""')+'"';
+function lvl(v,good,warn){return v>=good?'ok':v>=warn?'warn':'bad'}
+const planErr=(sel,r)=>{$(sel).innerHTML='<span class="mut">'+(r&&r.error==='building'?'The local data is still being built. Try again in a minute.':'Could not read the local data. Is the server running?')+'</span>'};
+
+/* ---------- compliance ---------- */
+let CMP=null;
+function mm(p){if(p._m)return p._m;const r=p.rows||0,lu=Date.parse(p.last_updated_on);
+  return p._m={...p,dollarShare:r?p.dollar/r:0,pctShare:r?p.pctRows/r:0,zeroShare:r?p.zero/r:0,dupShare:r?p.dup/r:0,ageDays:lu?Math.floor((Date.now()-lu)/864e5):null}}
+async function renderReport(){
+  if(!CMP){let r;try{r=await jget('/api/compliance')}catch(e){r=null}if(!r||!r.plans){$('#rep-none').style.display='';$('#rep-none').textContent='Could not read the local data. Is the server running?';return}CMP=r}
+  const P=CMP.plans.map(mm);
+  $('#rep-body').style.display=P.length?'':'none';$('#rep-none').style.display=P.length?'none':'';
+  if(!P.length)return;
+  const insurers=new Set(P.map(p=>p.insurer)),tot=P.reduce((a,m)=>a+m.rows,0),dol=P.reduce((a,m)=>a+m.dollar,0);
+  const suff=P.filter(m=>m.dollarShare>=.5).length;
+  let gap=null;KEY.forEach(([t,c,l])=>{const k=t+' '+c,v=P.map(p=>({p,med:p.key[k]?.med})).filter(x=>x.med);if(v.length>=2){v.sort((a,b)=>a.med-b.med);const r=v[v.length-1].med/v[0].med;if(!gap||r>gap.r)gap={r,l,c,lo:v[0],hi:v[v.length-1]}}});
+  $('#lede').innerHTML=`<b>${P.length}</b> plan${P.length>1?'s':''} from <b>${insurers.size}</b> insurer${insurers.size>1?'s':''} hold <b>${fmt(tot)}</b> price rows; <b>${pc1(dol/tot)}</b> are dollar prices. ${suff} of ${P.length} plan${P.length>1?'s are':' is'} sufficient on dollar share (50% or more).`+(gap?` The widest gap between plans is for <b><a href="#svc/${gap.c}">${esc(gap.l)}</a></b>: ${money0(gap.lo.med)} (${esc(gap.lo.p.label)}) versus ${money0(gap.hi.med)} (${esc(gap.hi.p.label)}), ${gap.r.toFixed(1)}×.`:'');
+  $('#kpis').innerHTML=[[insurers.size,'<a href="#sources">insurers</a>'],[P.length,'<a href="#sources">plans</a>'],[fmt(P.reduce((a,m)=>a+m.items,0)),'<a href="#explore">items</a> (service × arrangement)'],[pc1(dol/tot),'<a href="#prices">dollar share</a>, all plans'],[pc1(P.reduce((a,m)=>a+m.dup,0)/tot),'repeated rows']].map(([v,l])=>`<div class="kpi"><b>${v}</b><span>${l}</span></div>`).join('');
+  const IN=[...insurers].sort().map(n=>{const L=P.filter(p=>p.insurer===n),sum=f=>L.reduce((a,m)=>a+f(m),0),r=sum(m=>m.rows),lu=L.map(m=>m.last_updated_on).filter(Boolean).sort().pop(),key={};
+    KEY.forEach(([t,c])=>{const k=t+' '+c,a=L.map(m=>m.key[k]).filter(Boolean);if(a.length){const md=a.map(x=>x.med).sort((x,y)=>x-y);key[k]={med:md[md.length>>1],min:Math.min(...a.map(x=>x.min)),max:Math.max(...a.map(x=>x.max)),n:a.reduce((q,x)=>q+x.n,0)}}});
+    return {label:n,plans:L.length,items:sum(m=>m.items),dollarShare:r?sum(m=>m.dollar)/r:0,pctShare:r?sum(m=>m.pctRows)/r:0,zero:sum(m=>m.zero),zeroShare:r?sum(m=>m.zero)/r:0,dupShare:r?sum(m=>m.dup)/r:0,found:Object.keys(key).length,sc:{failed:sum(m=>m.sc.failed),total:sum(m=>m.sc.total)},lu,key}});
+  $('#byins').innerHTML=`<tr><th>Insurer</th><th class="n">Plans</th><th>Latest update</th><th class="n">Items</th><th class="n" title="Share of price rows that are a dollar amount. Higher is better.">Dollar prices</th><th class="n" title="Share of price rows filed as a percent of billed charges instead of dollars. These cannot be compared.">% of charges</th><th class="n" title="Rows with a negotiated price of $0, which is not a real price.">$0 rows</th><th class="n" title="Share of rows that repeat an identical earlier row.">Duplicate rows</th><th class="n" title="How many of the 9 common services (knee replacement, MRI, C-section and others) have a dollar price.">Key services found</th><th class="n" title="Format checks passed out of those run. Structure and values only, not price accuracy.">Format checks passed</th></tr>`+IN.map(m=>`<tr><td><b><a href="#sources">${esc(m.label)}</a></b></td><td class="n">${m.plans}</td><td>${esc(m.lu||'—')}</td><td class="n">${fmt(m.items)}</td><td class="n">${dot(m.dollarShare>=.5?'ok':'bad',pc1(m.dollarShare))}</td><td class="n">${pc1(m.pctShare)}</td><td class="n">${dot(m.zero===0?'ok':m.zeroShare<.01?'warn':'bad',m.zero?pc1(m.zeroShare):'0')}</td><td class="n">${pc1(m.dupShare)}</td><td class="n">${dot(lvl(m.found,7,4),m.found+' / '+KEY.length)}</td><td class="n">${dot(m.sc.failed===0?'ok':m.sc.failed<=m.plans*2?'warn':'bad',(m.sc.total-m.sc.failed)+' / '+m.sc.total)}</td></tr>`).join('');
+  $('#kgrid').innerHTML=KEY.map(([t,c,l])=>{const k=t+' '+c;
+    const v=P.map(p=>{const a=p.key[k];return a?{label:p.label,med:a.med,lo:a.min,hi:a.max,n:a.n}:null}).filter(Boolean).sort((a,b)=>a.med-b.med);
+    const missing=P.filter(p=>!p.key[k]).map(p=>p.label),max=Math.max(...v.map(x=>x.hi),1);
+    return `<div class="kcard"><h4><a href="#svc/${c}">${esc(l)}</a></h4><div class="code">${t} ${c}</div>`+(v.length?v.map(x=>`<div class="krow"><span class="l" title="${esc(x.label)}">${esc(x.label)}</span><div class="track" title="${x.n} rates · ${money(x.lo)} – ${money(x.hi)}"><div class="r" style="left:${x.lo/max*100}%;width:${Math.max((x.hi-x.lo)/max*100,1.2)}%"></div><div class="m" style="left:calc(${x.med/max*100}% - 1px)"></div></div><b style="text-align:right">${money0(x.med)}</b></div>`).join(''):'<div class="mut">Not published as a dollar price in any plan.</div>')+
+      (v.length>1?`<div class="gap">Medians differ ${(v[v.length-1].med/v[0].med).toFixed(1)}× across plans.</div>`:'')+(missing.length&&v.length?`<div class="gap" title="${esc(missing.join(', '))}">Not published in ${missing.length} of ${P.length} plans</div>`:'')+'</div>'}).join('');
+}
+$('#dl-score').onclick=()=>{if(!CMP)return;const L=[['plan','insurer','network','last_updated_on','age_days','bytes','items','price_rows','dollar_rows','dollar_share','percentage_share','zero_rows','repeated_share','key_services_found','schema_checks_passed','schema_checks_total'].join(',')];
+  CMP.plans.map(mm).forEach(m=>L.push([m.label,m.entity,m.plan,m.last_updated_on,m.ageDays,m.bytes,m.items,m.rows,m.dollar,m.dollarShare.toFixed(4),m.pctShare.toFixed(4),m.zero,m.dupShare.toFixed(4),m.found,m.sc.total-m.sc.failed,m.sc.total].map(q).join(',')));
+  download('payer-scorecard.csv',L)};
+$('#dl-key').onclick=()=>{if(!CMP)return;const L=[['plan','code','service','median','min','max','n_rates'].join(',')];
+  CMP.plans.forEach(p=>KEY.forEach(([t,c,l])=>{const a=p.key[t+' '+c];L.push([p.label,t+' '+c,l,a?a.med.toFixed(2):'',a?a.min:'',a?a.max:'',a?a.n:0].map(q).join(','))}));
+  download('payer-key-services.csv',L)};
+
+/* ---------- prices matrix ---------- */
+let keyOnly=false,mxTok=0;
+const mxUrl=all=>'/api/matrix?cls='+enc($('#mcls').value)+'&fee='+($('#mfee').checked?1:0)+'&q='+enc($('#mq').value)+(keyOnly?'&key=1':'')+(all?'&all=1':'');
+async function renderMx(){
+  const my=++mxTok;let r;try{r=await jget(mxUrl(false))}catch(e){r=null}if(my!==mxTok)return;
+  if(!r||!r.rows){planErr('#mxout',r);$('#mnote').textContent='';return}
+  const cols=r.plans,rows=r.rows;
+  const nr=r.rates!=null,per=$('#mfee').checked?'negotiated prices':'negotiated rates';
+  $('#mnote').innerHTML=`<b>${fmt(r.total)}</b> services (rows) × <b>${cols.length}</b> plan${cols.length>1?'s':''} (columns)`+(nr?`, from <b>${fmt(r.rates)}</b> ${per}.`:'.')+` Each cell shows the median of the ${per} for that service in that plan. Hover a cell for how many there are and their range. Highest median in red, lowest in green.`+(r.total>rows.length?` Showing the first ${fmt(rows.length)} services; the CSV has all.`:'');
+  const mx=x=>Math.max(...x.cells.filter(Boolean).map(c=>c[2]),0),mn=x=>Math.min(...x.cells.filter(Boolean).map(c=>c[2]));
+  $('#mxout').innerHTML='<table><tr><th>Service</th>'+cols.map(c=>`<th class="n">${esc(c.label)}</th>`).join('')+'</tr>'+rows.map(x=>{const hi=mx(x),lo=mn(x),multi=x.cells.filter(Boolean).length>1;
+    return `<tr><td><b>${esc(x.k)}</b><div class="mut" style="font-size:12px">${esc(x.descr)}</div></td>`+x.cells.map(c=>c?`<td class="n" title="${c[0]} rates · ${money(c[1])} – ${money(c[3])}" style="${multi&&c[2]===hi?'color:var(--bad);font-weight:600':multi&&c[2]===lo?'color:var(--ok);font-weight:600':''}">${money(c[2])}</td>`:'<td class="n mut">—</td>').join('')+'</tr>'}).join('')+'</table>';
+}
+let mxT=0;
+['mq','mcls','mfee'].forEach(id=>$('#'+id).addEventListener('input',()=>{keyOnly=false;$('#mkey').classList.add('alt');clearTimeout(mxT);mxT=setTimeout(renderMx,id==='mq'?250:0)}));
+$('#mkey').onclick=()=>{keyOnly=!keyOnly;$('#mkey').classList.toggle('alt',!keyOnly);renderMx()};
+$('#mcsv').onclick=async()=>{const r=await jget(mxUrl(true));if(!r.rows)return;const L=[['code','description',...r.plans.flatMap(c=>[c.label+' median',c.label+' n rates'])].map(q).join(',')];
+  r.rows.forEach(x=>L.push([x.k,x.descr,...x.cells.flatMap(c=>c?[c[2].toFixed(2),c[0]]:['',''])].map(q).join(',')));download('payer-median-prices.csv',L)};
+
+/* ---------- explore ---------- */
+const EXP={plan:null,init:false,sel:-1,tok:0,plans:[]};
+const EXAMPLE_SVC='71046'; /* chest X-ray: 21 different prices at the example hospital */
+const EXAMPLE_HOSP='H060011'; /* Denver Health & Hospital Authority: most prices, all four insurers, largest city */
+const COMMON=[['99213','Office visit'],['36415','Blood draw'],['80053','Metabolic panel'],['80061','Lipid panel'],['71046','Chest X-ray'],['70553','Brain MRI'],['74177','CT abd/pelvis'],['43239','Upper GI scope'],['47562','Gallbladder'],['45378','Colonoscopy'],['59510','C-section'],['27447','Knee replacement']];
+$('#chips').innerHTML='<span class="mut">Common:</span>'+COMMON.map(([c,l])=>`<button class="chip" data-c="${c}">${l} <span class="mut">${c}</span></button>`).join('');
+$('#chips').onclick=async e=>{const b=e.target.closest('[data-c]');if(b){$('#q').value=b.dataset.c;await loadExplore(false);$('#detail').classList.remove('open');const r=document.querySelector('#list tr[data-i]');if(r&&!matchMedia('(max-width:800px)').matches)r.click()}};
+$('#filesel').onchange=e=>{EXP.plan=+e.target.value;EXP.sel=-1;$('#net').value='';loadExplore(true)};
+async function renderExplore(){
+  if(EXP.init)return;EXP.init=true;
+  if(!EXP.plans.length){let r;try{r=await jget('/api/status')}catch(e){r=null}if(!r||!r.plans){EXP.init=false;planErr('#list',r);return}EXP.plans=r.plans.map(p=>({id:p.id,label:p.label}))}
+  if(!EXP.plan)EXP.plan=EXP.plans[0].id;
+  $('#filesel').innerHTML=EXP.plans.map(p=>`<option value="${p.id}" ${p.id===EXP.plan?'selected':''}>${esc(p.label)}</option>`).join('');
+  loadExplore(true);
+}
+async function loadExplore(meta){
+  const my=++EXP.tok;let r;
+  try{r=await jget('/api/items?plan='+EXP.plan+'&q='+enc($('#q').value)+'&net='+enc($('#net').value)+'&cls='+enc($('#cls').value)+(meta?'&meta=1':''))}catch(e){r=null}
+  if(my!==EXP.tok)return;
+  if(!r||!r.rows){planErr('#list',r);return}
+  if(meta){const pl=r.plan||{};
+    $('#net').innerHTML='<option value="">All networks</option>'+(r.nets||[]).map(n=>`<option>${esc(n)}</option>`).join('');
+    $('#src').textContent=`${pl.entity||''}${pl.plan_name?' · '+pl.plan_name+' ('+(pl.market||'')+')':''} · updated ${pl.last_updated_on||'?'} · ${fmt(pl.items||0)} items`;
+    $('#detail').classList.remove('open');$('#detail').innerHTML='<p class="mut">Select an item to see its price breakdown across providers.</p>'}
+  $('#list').innerHTML=r.rows.length?`<table><tr><th>Code</th><th>Description</th><th>Network</th><th class="n">Median</th><th class="n">Range</th></tr>`+r.rows.map(it=>`<tr data-i="${it.id}"><td>${esc(it.type)} ${esc(it.code)}</td><td>${esc(it.descr)}</td><td>${esc(it.net||'—')}</td><td class="n">${money(it.med)}</td><td class="n">${it.n?money(it.min)+' – '+money(it.max):'—'}</td></tr>`).join('')+'</table>':'<span class="mut">No matches.</span>';
+  document.querySelector(`#list tr[data-i="${EXP.sel}"]`)?.classList.add('sel');
+}
+let exT=0;
+['q','net','cls'].forEach(id=>$('#'+id).addEventListener('input',()=>{clearTimeout(exT);exT=setTimeout(()=>{if(!EXP.init)return;loadExplore(false);$('#detail').classList.remove('open')},id==='q'?250:0)}));
+$('#list').onclick=e=>{const tr=e.target.closest('tr[data-i]');if(tr)detail(+tr.dataset.i)};
+function compareBlock(cmp){
+  if(cmp.length<2)return '<p class="mut">This code appears in only one plan.</p>';
+  const hi=Math.max(...cmp.map(r=>r.mx));
+  return `<h4 style="margin:14px 0 4px">Same code across plans</h4><div>`+cmp.map(r=>`<div class="krow"><span class="l" title="${esc(r.label)}">${esc(r.label)}${r.plan_id===EXP.plan?' •':''}</span><div class="track" title="${r.n} rates · ${money(r.mn)} – ${money(r.mx)}"><div class="r" style="left:${r.mn/hi*100}%;width:${Math.max((r.mx-r.mn)/hi*100,1.2)}%"></div><div class="m" style="left:calc(${r.med/hi*100}% - 1px)"></div></div><b style="text-align:right">${money0(r.med)}</b></div>`).join('')+'</div>';
+}
+function stripPlot(ps){
+  const groups=new Map();ps.forEach(p=>{if(!groups.has(p.lab))groups.set(p.lab,[]);groups.get(p.lab).push(p.rate)});
+  const rows=[...groups].sort((a,b)=>Math.min(...a[1])-Math.min(...b[1])).slice(0,40);
+  const hi=Math.max(...ps.map(p=>p.rate)),step=[1,2,5].flatMap(m=>[1,10,100,1000,1e4,1e5].map(k=>m*k)).sort((a,b)=>a-b).find(s=>hi/s<=5)||hi;
+  const W=600,L=10,R=550,top=Math.ceil(hi/step)*step,x=v=>L+(R-L)*v/top,H=26+rows.length*44;
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Price per provider">`;
+  for(let v=0;v<=top;v+=step)s+=`<line x1="${x(v)}" x2="${x(v)}" y1="18" y2="${H}" stroke="var(--line)"/><text x="${x(v)}" y="12" font-size="11" fill="var(--mut)" text-anchor="${v?'middle':'start'}">${v?'$'+v.toLocaleString():'$0'}</text>`;
+  const pal=['#c0503a','#2a9d8f','#d98e3a','#7a5ccf','#d4547c','#3a6fc0','#6ea03a','#b65fb0'];
+  rows.forEach(([name,rs],i)=>{const y=26+i*44,c=pal[i%pal.length];
+    s+=`<text x="${L}" y="${y+12}" font-size="12" font-weight="600" fill="currentColor">${esc(name.length>46?name.slice(0,45)+'…':name)}</text><line x1="${L}" x2="${R}" y1="${y+28}" y2="${y+28}" stroke="var(--line)"/>`;
+    rs.forEach(r=>{s+=`<line x1="${x(r)}" x2="${x(r)}" y1="${y+16}" y2="${y+28}" stroke="${c}" stroke-width="3.5" stroke-linecap="round" stroke-opacity=".85"><title>${esc(name)}: ${money(r)}</title></line>`})});
+  return s+'</svg>'+(groups.size>rows.length?`<div class="mut">Showing ${rows.length} of ${groups.size} providers (lowest prices first).</div>`:'');
+}
+async function detail(id){
+  EXP.sel=id;document.querySelectorAll('#list tr.sel').forEach(r=>r.classList.remove('sel'));document.querySelector(`#list tr[data-i="${id}"]`)?.classList.add('sel');
+  const el=$('#detail');el.classList.add('open');el.scrollTop=0;
+  let D;try{D=await jget('/api/item?id='+id+'&cls='+enc($('#cls').value))}catch(e){D=null}
+  if(!D||!D.item){el.innerHTML='<p class="mut">Could not read this item.</p>';return}
+  const it=D.item,ps=D.rows.map(r=>{const s=r.sample[0],who=s?(nice(s.name)||'TIN '+s.tin):'provider group';
+    return{rate:r.rate,who,tin:s?s.tin:'',ng:r.ntin,cls:r.cls,unit:r.type,extra:r.ntin>1?`+${r.ntin-1} more`:'',lab:who+(r.ntin>1?` +${fmt(r.ntin-1)} more`:'')}});
+  const a=ps.map(p=>p.rate),max=Math.max(...a,1),lo=a[0],hi=a[a.length-1];
+  el.innerHTML=`<div class="dhead"><button class="b alt close" onclick="$('#detail').classList.remove('open')">✕ Close</button><h3 style="margin:0">${esc(it.type)} ${esc(it.code)} — ${esc(it.descr)}</h3></div>
+  <div class="mut">${esc(it.net||'No network name')}</div>
+  <div class="stats">${[['Min',lo],['25th',pct(a,.25)],['Median',pct(a,.5)],['75th',pct(a,.75)],['Max',hi]].map(([l,v])=>`<div class="stat"><b>${money(v)}</b><span>${l}</span></div>`).join('')}<div class="stat"><b>${hi&&lo?(hi/lo).toFixed(1)+'×':'—'}</b><span>Max / min</span></div></div>
+  ${ps.length?`<p style="margin:10px 0 4px">${D.providers===1?`This plan lists only <b>1</b> provider for this item (the plan’s data contains only this provider’s contract), paid <b>${fmt(ps.length)}</b> rate${ps.length===1?'':'s'}, from`:`<b>${fmt(D.providers)}</b> providers share <b>${fmt(ps.length)}</b> negotiated rate${ps.length===1?'':'s'}, from`} <b>${money(lo)}</b> to <b>${money(hi)}</b>. Each line is one rate; a row is the first provider in the group, with “+n more” for others paid the same rate.</p>${stripPlot(ps)}`:'<p class="mut">No dollar rates for this item.</p>'}
+  ${compareBlock(D.cmp)}
+  <details style="margin-top:10px"><summary class="mut" style="cursor:pointer">Show ${ps.length>500?'the lowest 500 of '+fmt(ps.length):'all '+ps.length} rates as a table</summary><table><tr><th>Provider</th><th>Class</th><th class="n">Rate</th><th style="width:30%"></th></tr>${ps.slice(0,500).map(p=>`<tr><td>${esc(p.who)}<div class="mut" style="font-size:12px">TIN ${esc(p.tin||'—')} ${esc(p.extra||'')}</div></td><td>${esc(p.cls||'—')}</td><td class="n">${money(p.rate)}${p.unit&&!/^(negotiated|fee schedule)$/i.test(p.unit)?`<div class="mut" style="font-size:12px">${esc(p.unit)}</div>`:''}</td><td><div class="bar" style="width:${p.rate/max*100}%"></div></td></tr>`).join('')}</table></details>
+  ${it.n_excl?`<p class="mut">${fmt(it.n_excl)} more rate(s) are percentages of billed charges or zero-dollar rates and are left out of the dollar statistics.</p>`:''}`;
+}
+
+/* ---------- find prices (provider-first workflow; data comes from the local database via /api) ---------- */
+const nice=s=>{if(!s)return s;if(s!==s.toUpperCase()||!/[A-Z]{3}/.test(s))return s;
+  return s.toLowerCase().replace(/(^|[\s(\/&-])([a-z])/g,(m,a,b)=>a+b.toUpperCase()).replace(/'S\b/g,"'s").replace(/\b(Llc|Inc|Pc|Pllc|Llp|Md|Dds|Dmd|Pa|Np|Cpa|Dba|Ii|Iii|Iv|Co|Usa|Cu|Mri|Ct|Cta|Mra|Ekg|Ecg|Hiv|Pet|Gi|Er|Icu|Cpt|Hcpcs|Dna|Psa|Tsh|Cbc)\b/g,x=>x.toUpperCase())};
+let nbusy=0;const busy=d=>{nbusy+=d;document.documentElement.classList.toggle('busy',nbusy>0)};
+const jget=async p=>{busy(1);try{const r=await fetch(p);if(r.status===503)return{error:'building'};if(!r.ok&&r.status>=500)throw new Error('server '+r.status);return await r.json()}finally{busy(-1)}};
+let toastT;function toast(t){let e=$('#toast');if(!e){e=document.createElement('div');e.id='toast';e.setAttribute('role','status');document.body.appendChild(e)}e.textContent=t;e.style.display='block';clearTimeout(toastT);toastT=setTimeout(()=>e.style.display='none',6000)}
+window.addEventListener('unhandledrejection',ev=>{console.error(ev.reason);toast('Something went wrong loading this page. Check your connection and try again.')});
+const enc=encodeURIComponent;
+let INSURERS=[],insF=(()=>{try{return localStorage.getItem('insF')||''}catch(e){return ''}})(),CUR=null,PROCS=[],procQ='',procCat='',rkCls='',clsF=null,allQ='',lastFrom=null,tok=0;
+const PROVC=new Map(),SVCC=new Map();
+const pname=e=>nice(e.name)||('TIN '+e.tin);
+async function renderFindStatus(){
+  let st;try{st=await jget('/api/status')}catch(e){$('#loadtitle').textContent='Server not reachable';$('#dstat').textContent='Start it with python3 server.py.';return}
+  if(!st.plans){$('#loadtitle').textContent='Building the local data…';$('#dstat').textContent=(st.log||[]).slice(-1)[0]||'This takes about a minute the first time.';setTimeout(renderFindStatus,3000);return}
+  if(!HMAP&&mapOK())initMap();
+  INSURERS=[...new Set(st.plans.map(p=>p.insurer))].sort();if(insF&&!INSURERS.includes(insF))insF='';
+  $('#loadtitle').textContent=`${st.hospitals} hospitals · ${st.plans.length} insurer plans · ${fmt(st.rates)} negotiated prices`;
+  const kb2=b=>b>=1e6?(b/1e6).toFixed(1)+' MB':Math.round(b/1e3)+' KB';
+  $('#srcplans').innerHTML='<tr><th>Insurer</th><th>Plan</th><th class="n">Size</th><th>Updated by insurer</th><th class="n">Negotiated prices</th><th>Original source</th></tr>'+st.plans.map(p=>`<tr><td>${esc(p.insurer)}</td><td>${esc(p.label)}</td><td class="n">${kb2(p.bytes)}</td><td>${esc(p.last_updated||'—')}</td><td class="n">${fmt(p.rate_rows)}</td><td>${p.source?`<a href="${esc(p.source)}" target="_blank" rel="noopener">Open</a>`:''}</td></tr>`).join('');
+  $('#stamp').textContent='Data refreshed '+st.built_at;
+  $('#srcnote').textContent=`${st.plans.length} plans · ${fmt(st.rates)} negotiated prices · ${st.hospitals} hospitals with prices (of ${st.hospitals_listed||'?'} listed by CMS; hospitals that could not be matched to a plan are left out) · data refreshed ${st.built_at}, next refresh ${st.next_refresh}.`;
+  $('#dstat').textContent=`Local data refreshed ${st.built_at}. The server refreshes it about every quarter (next ${st.next_refresh}).`+(st.building?' Refreshing now…':'')}
+/* home: suggestions + optional full list */
+let sT=0;
+async function renderFind(){
+  setHash();
+  const q=$('#isearch').value.trim(),my=++sT,sb=$('#isearch').parentElement;
+  if(q.length>=2){sb.classList.add('loading');let m;try{m=await jget('/api/providers?limit=8&q='+enc(q))}finally{if(my===sT)sb.classList.remove('loading')}if(my!==sT)return;
+    $('#sugg').innerHTML=m.rows.length?'<div class="sh">TOP MATCHES</div>'+m.rows.map(e=>`<div data-prov="${esc(e.tin)}"><b>${esc(pname(e))}</b><small>${esc(e.city)} ${esc(e.zip)} · ${e.n_ins} insurer${e.n_ins>1?'s':''} · ${fmt(e.n_rates)} negotiated prices</small></div>`).join(''):'<div class="sh">No matching hospital</div>';
+    $('#sugg').style.display=''}
+  else $('#sugg').style.display='none';
+  if(view==='all'){const m=await jget('/api/providers?limit=200&q='+enc(allQ));if(my!==sT)return;
+    if(ME){m.rows.forEach(h=>h.__d=h.lat==null?1e9:miles(ME[0],ME[1],h.lat,h.lng));m.rows.sort((a,b)=>a.__d-b.__d)}
+    $('#ilist').innerHTML=`<input id="aq" class="big" placeholder="Filter hospitals by name, city or zip" value="${esc(allQ)}"><p class="mut">${fmt(m.total)} hospital${m.total===1?'':'s'}${m.total>m.rows.length?`, showing the first ${m.rows.length}`:''}.</p>`+m.rows.map(e=>`<div class="icard" data-prov="${esc(e.tin)}"><div class="nm">${esc(pname(e))}</div><div class="mut">${esc(e.city)}, CO ${esc(e.zip)}${distTxt(e)} · ${e.n_ins} insurer${e.n_ins>1?'s':''} · ${fmt(e.n_rates)} negotiated prices</div></div>`).join('');markMap(ME?m.rows.slice(0,8):m.rows)}
+  $('#ilist').style.display=view==='all'?'':'none';
+}
+$('#isearch').addEventListener('keydown',e=>{const items=[...document.querySelectorAll('#sugg [data-prov]')];if(!items.length||$('#sugg').style.display==='none')return;
+  let i=items.findIndex(x=>x.classList.contains('hl'));
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();items.forEach(x=>x.classList.remove('hl'));i=e.key==='ArrowDown'?Math.min(i+1,items.length-1):Math.max(i-1,0);items[i].classList.add('hl');items[i].scrollIntoView({block:'nearest'})}
+  else if(e.key==='Enter'){e.preventDefault();openProv((items[i>=0?i:0]).dataset.prov,svc)}
+  else if(e.key==='Escape'){$('#sugg').style.display='none'}});
+let srchT;$('#isearch').oninput=()=>{clearTimeout(srchT);srchT=setTimeout(renderFind,150)};
+$('#lnk-src').onclick=e=>{e.preventDefault();show('sources')};
+$('#lnk-all').onclick=e=>{e.preventDefault();view=view==='all'?'home':'all';if(view==='home'&&HMAP){markMap(HALL);HMAP.setView([39.0,-105.55],7)}renderFind()};
+$('#isearch').addEventListener('focus',()=>{if($('#isearch').value.trim().length<2){$('#sugg').innerHTML=`<div class="sh">EXAMPLE</div><div data-example="1"><b>Denver Health &amp; Hospital Authority · Chest X-ray</b><small>Denver 80204 · 21 different prices from 4 insurers</small></div>`;$('#sugg').style.display=''}});
+document.addEventListener('click',e=>{const ex=e.target.closest('#sugg [data-example]');if(ex){e.preventDefault();openProv(EXAMPLE_HOSP,EXAMPLE_SVC,'')}});
+document.addEventListener('click',e=>{if(!e.target.closest('.sbox')&&$('#isearch').value.trim().length<2)$('#sugg').style.display='none'});
+$('#lnk-common').onclick=e=>{e.preventDefault();view='common';renderIview()};
+$('#ilist').addEventListener('input',e=>{if(e.target.id==='aq'){allQ=e.target.value;clearTimeout(srchT);srchT=setTimeout(async()=>{await renderFind();const n=$('#aq');n.focus();n.setSelectionRange(allQ.length,allQ.length)},250)}});
+function openProv(tin,code,cls){lastFrom=view==='csvc'||view==='all'?view:null;selProv=tin;if(code!=null)svc=code;clsF=cls===undefined?null:cls;view='prov';$('#isearch').value='';$('#sugg').style.display='none';renderIview()}
+document.addEventListener('click',e=>{const c=e.target.closest('#t-find [data-prov]');if(c){openProv(c.dataset.prov,svc);e.preventDefault()}});
+/* service lookup */
+async function resolveSvc(t){t=(t||'').trim();if(!t)return null;const u=t.toUpperCase();
+  if(SVCC.has(u))return u;
+  if(/^[A-Za-z]?\d{3,5}[A-Za-z]?$/.test(t)){const s=await jget('/api/service?code='+enc(u));if(!s.error){SVCC.set(u,s);return u}}
+  const m=(await jget('/api/services?limit=1&q='+enc(t))).rows[0];if(m){SVCC.set(m.code,m);return m.code}return null}
+const svcTitle=s=>s?`${s.type||''} ${s.code} — ${nice(s.descr||'')}`:'';
+function dedupe(rows){const m=new Map();rows.forEach(r=>{const k=r.ins+'|'+r.cls+'|'+r.type+'|'+r.rate;let x=m.get(k);if(!x){x={...r,plans:new Set()};m.set(k,x)}x.plans.add(r.l)});return[...m.values()]}
+const insBar=()=>INSURERS.length>1?`<div class="tabs insbar" role="group" aria-label="Show prices from one insurer"><span class="mut" style="align-self:center;font-size:13px">Your insurer:</span>${['',...INSURERS].map(i=>`<button class="chip${insF===i?' on':''}" data-ins="${esc(i)}">${i||'All'}</button>`).join('')}</div>`:'';
+const rowTr=x=>`<tr><td>${esc(x.ins)}</td><td>${planTxt(x.plans)}</td><td>${esc(x.cls)}</td><td>${esc(x.type)}</td><td class="n"><b>${money(x.rate)}</b></td></tr>`;
+const planTxt=set=>{const a=[...set];return esc(a[0])+(a.length>1?` <span class="mut">+${a.length-1} more with the same rate</span>`:'')};
+const tilesS=(lo,md,hi,n)=>`<div class="stats">${[['Lowest',money(lo)],['Median',money(md)],['Highest',money(hi)],['Negotiated prices',fmt(n)]].map(([l,v])=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`).join('')}</div>`;
+function pruneChips(){if(view!=='prov'||!selProv)return;const hid=selProv;jget('/api/services?tin='+enc(hid)+'&codes='+COMMON.map(x=>x[0]).join(',')).then(r=>{if(hid!==selProv||!r.codes)return;document.querySelectorAll('.svcrow .chip').forEach(b=>{if(!r.codes.includes(b.dataset.svc))b.remove()});document.querySelectorAll('.svcrow').forEach(x=>{if(!x.children.length){x.previousElementSibling&&x.previousElementSibling.remove();x.remove()}})}).catch(()=>{})}
+function svcSearchBox(){setTimeout(pruneChips,0);return `<div class="sbox"><input id="svcq" class="big" placeholder="Enter a description or code (e.g. 71046)" aria-label="Search services by description or billing code" value="${esc(svc)}" autocomplete="off"><div class="sugg" id="svcsugg" style="display:none"></div></div>
+  <details class="tips"><summary>Search tips</summary><ul><li>Type a billing code (for example <b>71046</b>) or everyday words such as <b>chest x-ray</b>, <b>broken arm</b> or <b>knee replacement</b>.</li><li>Hospitals describe the same service in different words, so try a code or a shorter phrase if nothing matches.</li><li>Results only list services this hospital has a negotiated price for.</li></ul></details><div class="mut" style="font-size:14px;margin:4px 0 6px"><b>Common searches</b></div><div class="svcrow">${COMMON.map(([c,l])=>`<button class="chip" data-svc="${c}">${l}</button>`).join('')}</div>`}
+/* ---------- price line charts (hover = quick facts, click = full detail) ---------- */
+const CH={};let chSeq=0;
+const CLSCOL={professional:'#2563eb',institutional:'#b93a32',both:'#6b7280'};
+const clsCol=c=>CLSCOL[(c||'').toLowerCase()]||'#d98e3a';
+function dotPlot(points,rowOrder,opt={}){
+  const id='ch'+(++chSeq);CH[id]={points,opt};
+  const hi=Math.max(...points.map(p=>p.x),1),step=[1,2,5].flatMap(m=>[1,10,100,1000,1e4,1e5].map(k=>m*k)).sort((a,b)=>a-b).find(s=>hi/s<=6)||hi,top=Math.ceil(hi/step)*step;
+  const W=700,L=14,R=670,RH=opt.rowH||52,H=28+rowOrder.length*RH,x=v=>L+(R-L)*v/top;
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" class="dots" data-ch="${id}" role="img" aria-label="${esc(opt.label||'Price line chart')}">`;
+  for(let v=0;v<=top;v+=step)s+=`<line x1="${x(v)}" x2="${x(v)}" y1="20" y2="${H-4}" stroke="var(--line)"/><text x="${x(v)}" y="12" font-size="11" fill="var(--mut)" text-anchor="${v?'middle':'start'}">${v?'$'+v.toLocaleString():'$0'}</text>`;
+  rowOrder.forEach((rn,i)=>{const y=28+i*RH;s+=`<text x="${L}" y="${y+12}" font-size="12.5" font-weight="700" fill="currentColor">${esc(rn.length>60?rn.slice(0,59)+'…':rn)}</text><line x1="${L}" x2="${R}" y1="${y+RH-12}" y2="${y+RH-12}" stroke="var(--line)"/>`});
+  const idx=new Map(rowOrder.map((r,i)=>[r,i])),used=new Map();
+  const LH=RH-30;
+  points.forEach((p,k)=>{const ri=idx.get(p.row);if(ri==null)return;const cx=x(p.x).toFixed(1),yb=28+ri*RH+RH-13,yt=yb-LH;
+    s+=`<line x1="${cx}" x2="${cx}" y1="${yt}" y2="${yb}" stroke="${p.color}" stroke-width="${opt.w||4}" stroke-linecap="round" stroke-opacity=".88" data-k="${k}" tabindex="0" role="button" aria-label="${esc(p.tip.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim())}"/>`});
+  s+='</svg>';
+  const legend=opt.legend?`<div class="legend">${opt.legend.map(([c,l])=>`<span><i style="background:${c}"></i>${esc(l)}</span>`).join('')}</div>`:'';
+  return `<div class="card dotcard" data-chart="${id}">${s}${legend}<div class="mut" style="font-size:12.5px">Hover a line for quick facts. Select a line for full detail.</div><div class="dd" id="dd-${id}"></div></div>`;
+}
+const tipEl=document.createElement('div');tipEl.className='tip';tipEl.style.display='none';document.body.appendChild(tipEl);
+function dotOf(t){const c=t.closest&&t.closest('line[data-k]');if(!c)return null;const id=c.closest('svg').dataset.ch;return{c,id,p:CH[id].points[+c.dataset.k]}}
+document.addEventListener('mousemove',e=>{const d=dotOf(e.target);if(!d){tipEl.style.display='none';return}
+  tipEl.innerHTML=d.p.tip;tipEl.style.display='block';const w=tipEl.offsetWidth,h=tipEl.offsetHeight;
+  tipEl.style.left=Math.max(8,Math.min(innerWidth-w-8,e.clientX+14))+'px';tipEl.style.top=(e.clientY+h+24>innerHeight?e.clientY-h-12:e.clientY+16)+'px'});
+document.addEventListener('click',e=>{const d=dotOf(e.target);if(!d)return;
+  document.querySelectorAll(`svg[data-ch="${d.id}"] line.sel`).forEach(c=>c.classList.remove('sel'));d.c.classList.add('sel');
+  const dd=document.getElementById('dd-'+d.id);dd.innerHTML=d.p.detail;dd.classList.add('on')});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.matches&&e.target.matches('line[data-k]'))e.target.dispatchEvent(new MouseEvent('click',{bubbles:true}))});
+const kvTable=rows=>`<table class="kv">${rows.filter(r=>r[1]!=null&&r[1]!=='').map(([k,v])=>`<tr><th>${k}</th><td>${v}</td></tr>`).join('')}</table>`;
+const vs=(v,m)=>m?`${money(v)} <span class="mut">(${v>=m?'+':'−'}${Math.abs((v/m-1)*100).toFixed(0)}% vs ${money(m)})</span>`:money(v);
+const TIER={lo:'#4caf7d',mid:'#9fb2ec',hi:'#e0736d'};
+const tierCol=(v,m)=>!m||v<=m*1.25?TIER.lo:v<=m*2?TIER.mid:TIER.hi;
+const TIERLEG=[[TIER.lo,'Lower'],[TIER.mid,'Middle'],[TIER.hi,'Higher']];
+function rateDots(D,pe,myMed,allMed){
+  const medOf=ins=>pct(D.filter(x=>x.ins===ins).map(x=>x.rate),.5),order=[...new Set(D.map(x=>x.ins))].sort((a,b)=>medOf(a)-medOf(b));
+  const pts=D.map(x=>{const plans=[...x.plans],pl=plans[0]+(plans.length>1?` +${plans.length-1} more`:''),names=(x.sample||[]).map(g=>esc(nice(g.name)||'TIN '+g.tin));
+    return{x:x.rate,row:x.ins,color:tierCol(x.rate,myMed),
+      tip:`<b>${money(x.rate)}</b> · ${esc(x.ins)}<br>${esc(pl)}<br><span class="mut">${esc(x.cls)} · ${esc(x.type)}</span><br><span class="mut">${(x.rate>=myMed?'+':'−')+Math.abs((x.rate/myMed-1)*100).toFixed(0)}% vs this hospital’s median · ${fmt(x.ntin||1)} provider${(x.ntin||1)>1?'s':''} paid this rate</span><br><i>Select for full detail</i>`,
+      detail:`<h4>${money(x.rate)} — ${esc(x.ins)}</h4>`+kvTable([['Hospital',esc(pname(pe))],['Plans with this rate',plans.map(esc).join('<br>')],['Billed as',esc(x.cls)],['Rate type',esc(x.type)],['Arrangement',esc(x.arr||'')],['vs this hospital’s median',vs(x.rate,myMed)],['vs all hospitals',vs(x.rate,allMed)],['Place of service codes',esc(x.sc||'')],['Modifiers',esc(x.mod||'')],['Expires',esc(x.exp||'')],['Note',esc(x.addl||'')],['Providers paid this rate',fmt(x.ntin||1)+((x.ntin||1)>1?' (including '+names.join(', ')+((x.ntin||1)>names.length?', …':'')+')':'')]])}});
+  return dotPlot(pts,order,{label:'Negotiated rates by insurer',legend:TIERLEG})}
+function providerDots(PI,all){
+  const order=[...new Set(PI.map(x=>x.ins))].sort((a,b)=>pct(PI.filter(x=>x.ins===a).map(x=>x.med),.5)-pct(PI.filter(x=>x.ins===b).map(x=>x.med),.5));
+  const pts=PI.map(x=>{const nm=nice(x.name)||'TIN '+x.tin;
+    return{x:x.med,row:x.ins,color:tierCol(x.med,all),tip:`<b>${money(x.med)}</b> median · ${esc(nm)}<br>${esc(x.ins)} · ${x.n} rate${x.n>1?'s':''}<br><i>Select for full detail</i>`,
+      detail:`<h4>${esc(nm)}</h4>`+kvTable([['Insurer',esc(x.ins)],['Median rate',vs(x.med,all)],['Range',money(x.min)+' – '+money(x.max)],['Rates',fmt(x.n)],['Plans',x.plans.map(esc).join('<br>')]])+`<button class="b sm" data-prov="${esc(x.tin)}">Open ${esc(nm.length>30?nm.slice(0,29)+'…':nm)}</button>`}});
+  return dotPlot(pts,order,{r:3.6,rowH:60,label:'Hospital median prices by insurer',legend:TIERLEG})}
+const provRows=L=>L.map(x=>`<tr data-prov="${esc(x.tin)}" style="cursor:pointer"><td><a href="#" onclick="return false">${esc(nice(x.name)||'TIN '+x.tin)}</a></td><td class="n"><b>${money(x.med)}</b></td><td class="n">${fmt(x.n)}</td></tr>`).join('');
+/* provider location from the public NPI registry (through the local server) */
+const pinfoRows=pe=>`${pe.aka?`<tr><th>Listed by CMS as</th><td>${esc(pe.aka)}</td></tr>`:''}<tr><th>Address</th><td>${esc(nice(pe.addr))}<br>${esc(pe.city)}, CO ${esc(pe.zip)}${pe.county?` <span class="mut">· ${esc(pe.county)} County</span>`:''}</td></tr><tr><th>Type</th><td>${esc(pe.type||'—')}${pe.own?` <span class="mut">· ${esc(pe.own)}</span>`:''}</td></tr><tr><th>Emergency services</th><td>${esc(pe.er||'—')}</td></tr>${pe.rating&&/^\d$/.test(pe.rating)?`<tr><th>CMS overall rating</th><td><span class="stars" aria-label="${pe.rating} of 5 stars">${'★'.repeat(+pe.rating)}<span class="off">${'★'.repeat(5-pe.rating)}</span></span></td></tr>`:''}<tr><th>CMS certification no.</th><td>${esc(pe.hid.slice(1))}</td></tr>${pe.phone?`<tr><th>Phone</th><td>${esc(pe.phone)}</td></tr>`:''}<tr><th>Negotiated prices</th><td>${fmt(pe.n_rates)}</td></tr><tr><th>Insurers</th><td>${pe.n_ins}</td></tr><tr><th>Plans</th><td>${pe.plans.length}</td></tr><tr><th>Plans updated</th><td>${pe.upd}</td></tr>`;
+async function getProv(tin){if(PROVC.has(tin))return PROVC.get(tin);const p=await jget('/api/provider?tin='+enc(tin));if(p.error)return null;
+  const up=[...new Set(p.plans.map(x=>x.last_updated).filter(Boolean))].sort();p.upd=up.length?up[0]+(up.length>1?' – '+up[up.length-1]:''):'—';p.n_ins=new Set(p.plans.map(x=>x.insurer)).size;PROVC.set(tin,p);return p}
+let statusP=null;
+function ensureStatus(){return statusP||(statusP=jget('/api/status').then(st=>{if(st.plans){INSURERS=[...new Set(st.plans.map(p=>p.insurer))].sort();if(insF&&!INSURERS.includes(insF))insF=''}else statusP=null;return st}).catch(()=>{statusP=null;return null}))}
+async function renderIview(){
+  setHash();if(view!=='home'&&view!=='all')await ensureStatus();$('#t-find').classList.toggle('deep',view!=='home'&&view!=='all');
+  const el=$('#iview'),fin=$('#finder'),my=++tok;
+  if(view==='common'){fin.style.display='none';el.style.display='';
+    const r=await jget('/api/procedures');if(my!==tok)return;PROCS=r.rows||[];document.title='Common procedures · Colorado Hospital Prices (reported by payers)';
+    const cats=[...new Set(PROCS.map(x=>x.k))].sort();
+    el.innerHTML=`<button class="back" id="iback">← Back</button><h2 style="margin-top:6px">Compare prices of common procedures</h2><p class="sub">Pick a procedure to see what Colorado insurers pay each hospital for it, on a map and in a chart.</p>
+      <input id="pq" class="big" placeholder="Search procedures (e.g. MRI, knee, delivery)" aria-label="Search procedures" autocomplete="off" value="${esc(procQ)}">
+      <div class="tabs" id="pcats">${['',...cats].map(c=>`<button class="chip${procCat===c?' on':''}" data-pcat="${esc(c)}">${c||'All'}</button>`).join('')}</div><div id="plist"></div>`;paintProcs();return}
+  if(view==='csvc'){fin.style.display='none';el.style.display='';const code=await resolveSvc(svc);if(my!==tok)return;
+    if(!PROCS.length)try{PROCS=(await jget('/api/procedures')).rows||[]}catch(e){}
+    const rk=code&&await jget('/api/rank?code='+enc(code)+'&cls='+enc(rkCls)+'&ins='+enc(insF));if(my!==tok)return;
+    if(!rk||!rk.all.n){el.innerHTML=`<button class="back" id="iback">← Back</button><p class="mut">No ${rkCls?rkCls+' ':''}dollar price found for this service in the plans.</p>${rkCls?'<p><button class="chip" data-rkcls="">Show all billing types</button></p>':''}${insF?'<p><button class="chip" data-ins="">Show all insurers</button></p>':''}`;return}
+    const L=rk.L;document.title=svcTitle(rk.service)+' · Colorado Hospital Prices (reported by payers)';CUR={kind:'svc',rk};
+    el.innerHTML=`<button class="back" id="iback">← Back</button>${(()=>{const pr=PROCS.find(x=>x.c===rk.service.code);return pr?`<h2 style="margin-top:6px">${esc(pr.n)}</h2><p class="sub">${esc(pr.d)} <span class="mut">${esc(svcTitle(rk.service))}</span></p>`:`<h2 style="margin-top:6px">${esc(svcTitle(rk.service))}</h2><p class="sub">Across all Colorado hospitals and insurers in the plans.</p>`})()}<div class="tabs">${[['','All'],['institutional','Facility (hospital) fees'],['professional','Professional (doctor) fees']].map(([c,l])=>`<button class="chip${rkCls===c?' on':''}" data-rkcls="${c}">${l}</button>`).join('')}</div>${insBar()}${tilesS(rk.all.min,rk.all.med,rk.all.max,rk.all.n)}<h3>Where prices are lower and higher</h3><p class="sub">Each line is a hospital, colored by its median price for this service.</p><div id="smap" class="hmap"></div><div class="legend" style="margin-bottom:10px">${TIERLEG.map(([c,l])=>`<span><i style="background:${c}"></i>${esc(l)}</span>`).join('')}</div><h3>Each hospital’s median, by insurer</h3><p class="sub">One dot per hospital and insurer.</p>${providerDots(rk.PI,rk.all.med)}
+      <div class="split2"><div><h3>Lowest median price</h3><div class="card scroll" style="padding:0"><table><tr><th>Hospital</th><th class="n">Median</th><th class="n">Rates</th></tr>${provRows(L.slice(0,10))}</table></div></div>
+      <div><h3>Highest median price</h3><div class="card scroll" style="padding:0"><table><tr><th>Hospital</th><th class="n">Median</th><th class="n">Rates</th></tr>${provRows(L.slice(-10).reverse())}</table></div></div></div><p class="mut" style="font-size:13px">${fmt(L.length)} hospitals have a dollar price for this service. Select a hospital to see what each insurer pays.</p><div class="row noprint"><button class="b alt sm" data-act="csv">Download CSV</button><button class="b alt sm" data-act="link">Copy link</button></div>`;drawSmap(rk);return}
+  if(view!=='prov'||!selProv){el.style.display='none';fin.style.display='';document.title='Colorado Hospital Prices (reported by payers)';return}
+  const pe=await getProv(selProv);if(my!==tok)return;if(!pe){toast('That hospital was not found.');view='home';selProv=null;setHash();el.style.display='none';fin.style.display='';return}
+  fin.style.display='none';el.style.display='';
+  const code=await resolveSvc(svc);if(my!==tok)return;let body='';
+  if(code){
+    const rt=await jget(`/api/rates?code=${enc(code)}&tin=${enc(selProv)}`);if(my!==tok)return;
+    // compare like with like: facility (institutional) fees when this hospital has them, otherwise everything
+    const effCls=clsF!==null?clsF:(rt.rows.some(r=>(r.cls||'').toLowerCase()==='institutional')?'institutional':'');
+    const rk=await jget('/api/rank?code='+enc(code)+'&cls='+enc(effCls)+'&ins='+enc(insF));if(my!==tok)return;
+    const all=rt.rows.map(r=>({l:r.label,ins:r.insurer,cls:r.cls||'—',type:r.type||'—',rate:r.rate,ntin:r.ntin,sample:r.sample,arr:r.arr,exp:r.exp,sc:r.sc,mod:r.modifier,addl:r.addl})),shown=all.filter(r=>(!effCls||r.cls.toLowerCase()===effCls)&&(!insF||r.ins===insF));
+    const classes=[...new Set(all.map(r=>r.cls.toLowerCase()))];
+    if(!all.length)body=`<h3 style="margin:18px 0 2px">${esc(svcTitle(rt.service))}</h3><p class="mut">${esc(pname(pe))} has no dollar price for this service in the plans. It appears in ${pe.plans.length} plan${pe.plans.length>1?'s':''} from ${pe.n_ins} insurer${pe.n_ins>1?'s':''}.</p>`;
+    else{
+      const a=shown.map(r=>r.rate),myMed=pct(a,.5),D=dedupe(shown).sort((x,y)=>y.rate-x.rate),below=rk.L.filter(x=>x.med<myMed).length;
+      if(!HALL.length)try{HALL=(await jget('/api/hospitals')).rows||[]}catch(e){}
+      CUR={kind:'prov',pe,rt,D,shown};
+      body=`<h3 style="margin:18px 0 2px">${esc(svcTitle(rt.service))}</h3>
+      <div class="tabs">${['',...classes].map(c=>`<button class="chip${effCls===c?' on':''}" data-cls="${esc(c)}">${c?esc(({institutional:'Facility (hospital)',professional:'Professional (doctor)',both:'Both'})[c]||c[0].toUpperCase()+c.slice(1)):'All'}</button>`).join('')}</div>${insBar()}${clsF===null&&effCls==='institutional'?'<p class="mut" style="font-size:13px;margin:4px 0">Showing facility (hospital) fees. Choose All to include doctors’ professional fees.</p>':''}`+
+      (a.length?`${tilesS(Math.min(...a),myMed,Math.max(...a),a.length)}<h3 style="margin:16px 0 2px">What each insurer pays</h3>${rateDots(D,pe,myMed,rk.all.med)}${(()=>{const have=new Set(D.map(x=>x.ins)),miss=[...new Set(pe.plans.map(x=>x.insurer))].filter(i=>!have.has(i));return miss.length?`<p class="mut" style="font-size:13px;margin:6px 0 0">No dollar price for this service from ${miss.map(esc).join(', ')}.</p>`:''})()}
+      <div class="card scroll" style="padding:0;margin-top:12px"><table><tr><th>Insurer</th><th>Plan</th><th>Billed as</th><th>Type</th><th class="n">Rate</th></tr>${D.slice(0,12).map(rowTr).join('')}</table>${D.length>12?`<details style="padding:0 8px 8px"><summary class="mut">Show ${D.length-12} more rates</summary><table>${D.slice(12).map(rowTr).join('')}</table></details>`:''}</div>
+      <h3 style="margin:22px 0 2px">Compare with other hospitals</h3><p class="sub">${esc(pname(pe))}’s median of ${money(myMed)} is higher than ${Math.round(below/rk.L.length*100)}% of the ${fmt(rk.L.length)} hospitals with a price for this service.</p>
+      <div class="split2"><div><div class="mut" style="font-size:13px;margin-bottom:4px">Lowest median</div><div class="card scroll" style="padding:0"><table><tr><th>Hospital</th><th class="n">Median</th><th class="n">Rates</th></tr>${provRows(rk.L.slice(0,5))}</table></div></div>
+      <div><div class="mut" style="font-size:13px;margin-bottom:4px">Highest median</div><div class="card scroll" style="padding:0"><table><tr><th>Hospital</th><th class="n">Median</th><th class="n">Rates</th></tr>${provRows(rk.L.slice(-5).reverse())}</table></div></div></div>${nearbyBlock(pe,rk,myMed)}
+      <div class="row noprint" style="margin:10px 0"><button class="b alt sm" data-act="csv">Download CSV</button><button class="b alt sm" data-act="link">Copy link</button></div><p class="mut" style="font-size:13px">Prices are negotiated amounts between insurer and provider, not what you will pay. “Billed as” shows whether the rate is for the professional (doctor) or institutional (facility) claim.</p>`:`<p class="mut">No ${esc(effCls)} ${esc(insF)} rates for this service.</p>`)}
+  }else if(svc.trim())body=`<p class="mut">No service matching “${esc(svc)}” in the plans.</p>`;
+  el.innerHTML=`<button class="back" id="iback">← Back</button>
+   <div class="card"><div class="info"><div><div class="nm2">${esc(pname(pe))}<div class="mut" style="font-weight:400;font-size:14px">${[...new Set(pe.plans.map(x=>x.insurer))].map(esc).join(' · ')}</div></div><div id="pmap"></div></div>
+   <table class="kv" id="pinfo">${pinfoRows(pe)}</table></div><p class="mut" style="font-size:12.5px;margin:8px 0 0">${pe.shared&&pe.shared.length?`<b>Shared prices:</b> ${esc(pname(pe))} files its rates under a tax ID it shares with ${pe.shared.length>4?pe.shared.length+' other hospitals':'<b>'+pe.shared.map(esc).join(', ')+'</b>'}, so some prices below are system-wide rather than specific to this hospital. `:''}Rates are negotiated with the hospital’s tax IDs, which can also cover clinics and physicians billing under the hospital, and they can differ from the prices in the hospital’s own price list. Hospital list and details: CMS Care Compare. Map: OpenStreetMap.</p></div>
+   ${svcSearchBox()}${body}`;
+  document.title=pname(pe)+' prices · Colorado Hospital Prices (reported by payers)';drawPmap(pe);
+}
+$('#iview').onclick=e=>{
+  if(e.target.id==='iback'){view=view==='prov'?(lastFrom||'home'):view==='csvc'?'common':'home';if(view==='home')selProv=null;renderFind();renderIview();setTimeout(()=>HMAP&&HMAP.invalidateSize(),50);return}
+  const c=e.target.closest('[data-svc]');if(c){svc=c.dataset.svc;renderIview();return}
+  const cl=e.target.closest('[data-cls]');if(cl){clsF=cl.dataset.cls;renderIview();return}
+  const ac=e.target.closest('[data-act]');if(ac){if(ac.dataset.act==='link'){navigator.clipboard?.writeText(location.href).then(()=>toast('Link copied'),()=>toast('Copy the address from your browser bar'));return}
+    if(ac.dataset.act==='csv'&&CUR){
+      if(CUR.kind==='svc'){const L=[['hospital','insurer','plans','median_rate','min_rate','max_rate','n_rates','service'].join(',')];CUR.rk.PI.slice().sort((a,b)=>(a.name||'').localeCompare(b.name||'')).forEach(x=>L.push([nice(x.name),x.ins,x.plans.join('; '),x.med,x.min,x.max,x.n,svcTitle(CUR.rk.service)].map(q).join(',')));download('hospital-prices-'+CUR.rk.service.code+'.csv',L)}
+      else{const L=[['hospital','service','insurer','plan','billed_as','rate_type','rate'].join(',')];CUR.shown.forEach(r=>L.push([pname(CUR.pe),svcTitle(CUR.rt.service),r.ins,r.l,r.cls,r.type,r.rate].map(q).join(',')));download('prices-'+CUR.pe.hid+'-'+CUR.rt.service.code+'.csv',L)}}
+    return}
+  const ib=e.target.closest('[data-ins]');if(ib){insF=ib.dataset.ins;try{localStorage.setItem('insF',insF)}catch(x){}renderIview();return}
+  const rc=e.target.closest('[data-rkcls]');if(rc){rkCls=rc.dataset.rkcls;renderIview();return}
+  const cs=e.target.closest('[data-csvc]');if(cs){svc=cs.dataset.csvc;view='csvc';renderIview();return}
+  const sg=e.target.closest('#svcsugg [data-code]');if(sg){svc=sg.dataset.code;renderIview()}};
+let svcT;
+$('#iview').addEventListener('input',e=>{if(e.target.id!=='svcq')return;svc=e.target.value;const q=svc.trim(),sg=$('#svcsugg');clearTimeout(svcT);
+  svcT=setTimeout(async()=>{const m=q.length>=2?(await jget('/api/services?limit=8&q='+enc(q)+(view==='prov'&&selProv?'&tin='+enc(selProv):''))).rows:[];if(svc.trim()!==q||!$('#svcsugg'))return;
+    sg.style.display=m.length?'':'none';sg.innerHTML=m.length?'<div class="sh">TOP MATCHES</div>'+m.map(s=>`<div data-code="${esc(s.code)}"><b>${esc(nice(s.descr)||s.code)}</b><small>${esc(s.type)} ${esc(s.code)} · ${s.n_hosp} hospital${s.n_hosp>1?'s':''} with prices</small></div>`).join(''):''},180)});
+$('#iview').addEventListener('keydown',async e=>{if(e.target.id==='svcq'&&e.key==='Enter'){const pos=e.target.value.length;await renderIview();const n=$('#svcq');if(n){n.focus();n.setSelectionRange(pos,pos)}}});
+function paintProcs(){
+  const toks=procQ.toLowerCase().split(/\s+/).filter(Boolean),rows=PROCS.filter(x=>(!procCat||x.k===procCat)&&toks.every(t=>(x.n+' '+x.d+' '+x.c+' '+x.k).toLowerCase().includes(t)));
+  $('#plist').innerHTML=rows.length?`<p class="mut" style="margin:8px 0">${rows.length} procedure${rows.length>1?'s':''}, listed alphabetically.</p><div class="card" style="padding:0">`+rows.map(x=>`<div class="icard" style="border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none" data-csvc="${esc(x.c)}" tabindex="0" role="link"><div class="nm">${esc(x.n)}</div><div>${esc(x.d)}</div><div class="mut" style="font-size:13px;margin-top:2px">CPT ${esc(x.c)} · ${x.h} hospital${x.h>1?'s':''} · median ${money0(x.med)} · range ${money0(x.mn)}–${money0(x.mx)}</div></div>`).join('')+'</div>':'<p class="mut">No procedure matches. Try a shorter word, or search by billing code on a hospital page.</p>'}
+document.addEventListener('input',e=>{if(e.target.id==='pq'){procQ=e.target.value;paintProcs()}});
+document.addEventListener('click',e=>{const c=e.target.closest('[data-pcat]');if(c){procCat=c.dataset.pcat;document.querySelectorAll('#pcats .chip').forEach(x=>x.classList.toggle('on',x===c));paintProcs()}});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.matches&&e.target.matches('[data-csvc]'))e.target.click()});
+/* ---------- maps (Leaflet + OpenStreetMap) ---------- */
+const mapOK=()=>typeof L!=='undefined';
+function baseMap(el,center,zoom){const m=L.map(el,{scrollWheelZoom:false}).setView(center,zoom);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap contributors'}).addTo(m);return m}
+async function initMap(){
+  if(!mapOK()){$('#hmap').style.display='none';return}
+  if(HMAP){HMAP.invalidateSize();return}
+  const r=await jget('/api/hospitals');if(!r.rows)return;HALL=r.rows;
+  HMAP=baseMap('hmap',[39.0,-105.55],7);HMK=(L.markerClusterGroup?L.markerClusterGroup({maxClusterRadius:36,disableClusteringAtZoom:11,showCoverageOnHover:false}):L.layerGroup()).addTo(HMAP);markMap(HALL)}
+let ME=null;
+const miles=(a,b,c,d)=>{const r=x=>x*Math.PI/180,h=Math.sin(r(c-a)/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(r(d-b)/2)**2;return 3958.8*2*Math.asin(Math.sqrt(h))};
+const distTxt=h=>ME&&h.lat!=null?` · ${miles(ME[0],ME[1],h.lat,h.lng).toFixed(h.__d<10?1:0)} mi away`:'';
+function markMap(rows){
+  if(!HMAP)return;HMK.clearLayers();const pts=[];
+  rows.filter(h=>h.lat!=null).forEach(h=>{pts.push([h.lat,h.lng]);
+    L.circleMarker([h.lat,h.lng],{radius:7,color:'#fff',weight:1.5,fillColor:'#1d5fd1',fillOpacity:.9}).addTo(HMK)
+      .bindTooltip(esc(h.name)).bindPopup(`<b>${esc(h.name)}</b><br>${esc(h.city)}, CO ${esc(h.zip)}<br><span class="mut">${h.n_ins} insurer${h.n_ins>1?'s':''} · ${fmt(h.n_rates)} negotiated prices</span><br><button data-prov="${esc(h.tin)}">See prices</button>`)});
+  if(ME){L.circleMarker(ME,{radius:7,color:'#fff',weight:2,fillColor:'#b93a32',fillOpacity:1}).addTo(HMK).bindTooltip('You are here');pts.push(ME)}
+  if(pts.length&&rows.length<HALL.length)HMAP.fitBounds(pts,{padding:[30,30],maxZoom:11})}
+async function drawSmap(rk){
+  if(!mapOK()||!$('#smap')){if($('#smap'))$('#smap').style.display='none';return}
+  if(!HALL.length){const r=await jget('/api/hospitals');HALL=r.rows||[]}
+  const by=new Map(HALL.map(h=>[h.tin,h])),m=baseMap('smap',[39.0,-105.55],7),pts=[];
+  rk.L.forEach(x=>{const h=by.get(x.tin);if(!h||h.lat==null)return;pts.push([h.lat,h.lng]);
+    L.circleMarker([h.lat,h.lng],{radius:8,color:'#fff',weight:1.5,fillColor:tierCol(x.med,rk.all.med),fillOpacity:.92}).addTo(m)
+     .bindTooltip(`${esc(x.name)}: ${money(x.med)}`).bindPopup(`<b>${esc(x.name)}</b><br>Median ${money(x.med)} · ${fmt(x.n)} rate${x.n>1?'s':''}<br><button data-prov="${esc(x.tin)}">See prices</button>`)});
+  if(pts.length>1)m.fitBounds(pts,{padding:[24,24],maxZoom:10})}
+function nearbyBlock(pe,rk,myMed){
+  if(pe.lat==null||!HALL.length)return '';
+  const by=new Map(HALL.map(h=>[h.tin,h])),rows=rk.L.filter(x=>x.tin!==pe.hid&&by.get(x.tin)?.lat!=null).map(x=>{const h=by.get(x.tin);return{...x,city:h.city,d:miles(pe.lat,pe.lng,h.lat,h.lng)}}).sort((a,b)=>a.d-b.d).slice(0,6);
+  if(!rows.length)return '';
+  return `<h3 style="margin:22px 0 2px">Nearby hospitals</h3><p class="sub">The six closest hospitals with a price for this service, with the distance from ${esc(pname(pe))}.</p><div class="card scroll" style="padding:0"><table><tr><th>Hospital</th><th class="n">Distance</th><th class="n">Median</th><th class="n">vs ${esc(pname(pe).length>22?'this hospital':pname(pe))}</th></tr>${rows.map(x=>`<tr data-prov="${esc(x.tin)}" style="cursor:pointer"><td><a href="#" onclick="return false">${esc(x.name)}</a><div class="mut" style="font-size:12px">${esc(x.city)}</div></td><td class="n">${x.d.toFixed(x.d<10?1:0)} mi</td><td class="n"><b>${money(x.med)}</b></td><td class="n" style="color:${x.med<myMed?'var(--ok)':'var(--bad)'}">${(x.med>=myMed?'+':'−')+Math.abs((x.med/myMed-1)*100).toFixed(0)}%</td></tr>`).join('')}</table></div>`}
+function drawPmap(pe){if(!mapOK()||pe.lat==null||!$('#pmap'))return;const m=baseMap('pmap',[pe.lat,pe.lng],13);
+  L.circleMarker([pe.lat,pe.lng],{radius:8,color:'#fff',weight:2,fillColor:'#b93a32',fillOpacity:.95}).addTo(m).bindTooltip(esc(pe.name))}
+/* ---------- links you can share: the address bar follows the page ---------- */
+function setHash(){if(hashLock)return;let h=curTab;
+  if(curTab==='find')h=view==='prov'&&selProv?'h/'+selProv+(svc?'/'+enc(svc):''):view==='all'?'all':view==='common'?'common':view==='csvc'&&svc?'svc/'+enc(svc):'find';
+  if(curTab==='find'&&insF&&(view==='prov'||view==='csvc'))h+='?ins='+enc(insF);
+  if(h===lastHash)return;lastHash=h;history.pushState(null,'','#'+h)}
+function applyHash(){const raw=decodeURIComponent((location.hash||'').slice(1));if(raw===lastHash)return;lastHash=raw;const qi=raw.indexOf('?'),h=qi<0?raw:raw.slice(0,qi),p=h.split('/');hashLock=true;
+  if(qi>=0){const m=/(?:^|&)ins=([^&]*)/.exec(raw.slice(qi+1));if(m){insF=decodeURIComponent(m[1]);try{localStorage.setItem('insF',insF)}catch(x){}}}
+  try{if(['report','prices','explore','sources','method'].includes(p[0]))show(p[0]);
+    else{show('find');selProv=null;svc='';clsF=null;view='home';
+      if(p[0]==='h'&&p[1]){selProv=p[1];svc=p[2]||'';view='prov'}else if(p[0]==='all')view='all';else if(p[0]==='common')view='common';else if(p[0]==='svc'&&p[1]){svc=p[1];view='csvc'}
+      renderFind();renderIview()}
+  }finally{hashLock=false}}
+window.addEventListener('popstate',applyHash);
+initMap();
+if(location.hash.length>1)applyHash();
+renderFindStatus();
+</script>
+</body>
+</html>

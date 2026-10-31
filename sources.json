@@ -1,0 +1,254 @@
+[
+ {
+  "n": "Denver Health \u00b7 ffs",
+  "d": "ffs \u00b7 575 KB",
+  "u": "https://www.denverhealthmedicalplan.org/transparency-coverage/files/2026-07-09_DHMP_in-network-ffs-hios-shared.json",
+  "insurer": "Denver Health Medical Plan"
+ },
+ {
+  "n": "Cigna \u00b7 pathwell oap",
+  "d": "3.5 MB gz",
+  "u": "https://d25kgz5rikkq4n.cloudfront.net/cost_transparency/state_mrf/CO/in-network-rates/reporting_month=2026-07/2026-07-01_CO_cigna-health-life-insurance-company_pathwell-oap_in-network-rates.json.gz?Expires=1817092799&Signature=Hx3J7tI7xCNNkuYWuKjSOl-yavHNYMjq6ShBlfk87A3D3OVd-4iMOTlnrnUz56COvVPm8BqEw~tIKqiyIiGzjIEZ8pNofxptjtfhltaH6lLbikxrqx1YnlSSQ4fMWQO-0GxneHkj4upe2Cedj~bzJmFSJaEHtrJXDJU2gapfAlu-YFYqnEpKzIQa2FfiMPyNXHRFyzYZEsbnkPUvAs9M1h4wpFi4IUGu~jWomQq208jOeRHapDt5Hx-BQDeGhzxSv27-wjIjRItqjhMys4eakt~sMndPr3lun6UA8k3xZ0et3tOWPkJCMDelxVF33qvkfnr2DAGJXtVrcdApydnJPg__&Key-Pair-Id=K1NVBEPVH9LWJP",
+  "insurer": "Cigna"
+ },
+ {
+  "n": "Cigna \u00b7 national oap",
+  "d": "3.5 MB gz",
+  "u": "https://d25kgz5rikkq4n.cloudfront.net/cost_transparency/state_mrf/CO/in-network-rates/reporting_month=2026-07/2026-07-01_CO_cigna-health-life-insurance-company_national-oap_in-network-rates.json.gz?Expires=1817092799&Signature=LhfO6jSAbuEewP6Ij~98ItA92Dvxb8tL3nJRravi2QKRLgiGuEUGkmbGAwQRuPI9htfkPFopJ6gJKa520UcmSh5TPoBSxL84f0PaZmXIx347NgfRi6Mu36~GRpBLryDk~4kfwRZDiRa4AJ~kF6IvRASl2iiXdQgw0YL4tlY9xFoYwzN3bej~yWrEuW0fVwD2tAhlbhrcN8CgQ8und9rZ~aKEvlT-9~aS-jjl8H8Da~vgPsAUntytqZpf322Fk5VxLQQKo76ZVdjZgMv95WyKig0mBnn4Cjc2S9eFhZebG1ksRVCBIbeA-eE6pqeWZj5vpLC7e2ufQV1~ApxkBH8Lew__&Key-Pair-Id=K1NVBEPVH9LWJP",
+  "insurer": "Cigna"
+ },
+ {
+  "n": "Cigna \u00b7 localplus with ebh plus pathwell",
+  "d": "3.5 MB gz",
+  "u": "https://d25kgz5rikkq4n.cloudfront.net/cost_transparency/state_mrf/CO/in-network-rates/reporting_month=2026-07/2026-07-01_CO_cigna-health-life-insurance-company_localplus-with-ebh-plus-pathwell_in-network-rates.json.gz?Expires=1817092799&Signature=Ucxx8kY6I-Ls-aEszNr3Tbi1B0nBfiCybaz3sZIaTdc78H0doQhzUlI7thdXjXk8WVatpwD~omgIpUEnlZ23ohyv5uQfS56tRRF-8WYFWaVDTPFHOMw6KeSgeG95GcjAhV3sMPbyOP4Llr8tf7dXP93XnVnLOwiwxJTheSM7njXvlM1iApcX2oZ7rP49Sj6dhDA67TZ5KxkIuMP8l7ekXJ7pmg~3uT7haNubvDzbshF0zaUXmrdBoQqNI1DrY~n2p4qVD1iOISLOiGGU03X1IwJZ4o2bUWspkr314pGCuvAB4xkGgwT7GcAG3Nj1GDWT-wAjjtFVIjWIY9cMMWeguA__&Key-Pair-Id=K1NVBEPVH9LWJP",
+  "insurer": "Cigna"
+ },
+ {
+  "n": "Cigna \u00b7 localplus",
+  "d": "3.5 MB gz",
+  "u": "https://d25kgz5rikkq4n.cloudfront.net/cost_transparency/state_mrf/CO/in-network-rates/reporting_month=2026-07/2026-07-01_CO_cigna-health-life-insurance-company_localplus_in-network-rates.json.gz?Expires=1817092799&Signature=XkJ3FrcnJzWuKHX2geHZL-vkaKCYay~DR7Sop4HpTd5eJNH1lZI1LFTWjk2J1WiZn4fY-nbLeG3a5i5o~bMtsI4tfJ9I7~5rM6-GFK8XvMlukuFpAC-cX7-3EOG7mYm4JlOQR-ICT9CTvq50f8TgiZiIUVcPrMJm-Q72mKH-zKmRQIS0MaaEyTDuANgaDrfSlcDxaL27Y8LJUKSAI5-adEYwbMITLJ5U-E6Zc9ySZR3f-4UVAe9M2SX7D6dcsGuwcvY03aEkJQBNRdfSyAjMiKQp402JG6pEfPg1AgjZxPClqmEurvm6ka-KOATWzuHF3zgmLucnTY9K53i0NfA0Xg__&Key-Pair-Id=K1NVBEPVH9LWJP",
+  "insurer": "Cigna"
+ },
+ {
+  "n": "Cigna \u00b7 denver co connect network",
+  "d": "348 KB gz",
+  "u": "https://d25kgz5rikkq4n.cloudfront.net/cost_transparency/state_mrf/CO/in-network-rates/reporting_month=2026-07/2026-07-01_CO_cigna-health-life-insurance-company_denver-co-connect-network_in-network-rates.json.gz?Expires=1817092799&Signature=VOHMWJ0RMcko3sHWVaJUb4at-uVO~SwZjz4~STx7a0a2TRyujOsSB3k-H88nZ7QajV~uXJ1sd811ZzL6W-Ieu-FpO-Gii1GQ92D3W0ZTyT6fz6Q3Kn1lgBLKATpdUmTz8vZyxhWIRN0vZkLY1fPG15N-zMhIAkLoKky2G85vky2ErQBbz7Va1~Jf0w~0Ehx9q~RsnnueJXfr80ogx04Ep0nIiZPMjnMKySw3oFvoKR6mgnegJ9usgg78yq6Ic48zyjlZ3k4geJlh9DHRz-rU9Qua8wRvXptNJ8OVTdSMyLMs7fl6Gy4K4koKTN2WhnwfxsoBvWhoAVFk3ARTVBy06w__&Key-Pair-Id=K1NVBEPVH9LWJP",
+  "insurer": "Cigna"
+ },
+ {
+  "n": "Cigna \u00b7 colorado cpop",
+  "d": "488 KB gz",
+  "u": "https://d25kgz5rikkq4n.cloudfront.net/cost_transparency/state_mrf/CO/in-network-rates/reporting_month=2026-07/2026-07-01_CO_cigna-health-life-insurance-company_colorado-cpop_in-network-rates.json.gz?Expires=1817092799&Signature=qAeY5WMHys-wxbJjrvn2JEvnMDxlUKsjDTXI9DvJHxFZtR7qLsWxNECNy5x8K9m-eqdcWgjCe4tpXQAPM~7NyvwnSuE~fpMBbo-2pHeaVVcLcXVAd2w4Ssrq7RuoWGFt05XORHX7f~eG-fMZ6I14izpXYR3aiXy15yO~LZLluJgKYmui58aFkHv4t1O~7geOogUyiUcbFdAnX2ETAUfwj15P9cmMKAbRgUOM2lgZKwLzQvLfgZm-i5T-6LAUncWOapT8fXc0WV37zCPDqZuuE-U0HVyi-9gPSRG1054kYm3yYVs-X~JSuzEbKFj4~pbfEvxPy2NsPPpBxwJD2kr20w__&Key-Pair-Id=K1NVBEPVH9LWJP",
+  "insurer": "Cigna"
+ },
+ {
+  "n": "Cigna \u00b7 health care alliance of the front range",
+  "d": "3.0 MB gz",
+  "u": "https://d25kgz5rikkq4n.cloudfront.net/cost_transparency/state_mrf/CO/in-network-rates/reporting_month=2026-07/2026-07-01_CO_cigna-health-life-insurance-company_health-care-alliance-of-the-front-range_in-network-rates.json.gz?Expires=1817092799&Signature=SjMOEOgQCyyO8xPXvsVEXjTNOkLzanHiSaLWuGTzilfm4g~BhKn8KTcGdFcQkMOdpD~YTr5xiB2cVe4lkWeITq51JahYmlt0eKJFXoYG1HKBLsBMxbBTwRwlhf~uesxkD7nh5IVZ9E~JLc8WEU8awwnuqHTGoCD0zThTPlSQwcy5rsl9eDHX0Zm7y2pcbs5zNuXJcpFKIjKgOO6GcmRyM3GY4TvajQAmV-y3gwKB4TuoSfc1HQBLqfFlhA~40Qur7KQwx~fr5ll2Z6~H27rWlKpC59hwKSzScIPAXUQbTUy8YFCwTqBF~LGSgJgIykOgjmM4N1xk9J1~eoZ36CD6gw__&Key-Pair-Id=K1NVBEPVH9LWJP",
+  "insurer": "Cigna"
+ },
+ {
+  "n": "Cigna \u00b7 pathwell ppo",
+  "d": "3.5 MB gz",
+  "u": "https://d25kgz5rikkq4n.cloudfront.net/cost_transparency/state_mrf/CO/in-network-rates/reporting_month=2026-07/2026-07-01_CO_cigna-health-life-insurance-company_pathwell-ppo_in-network-rates.json.gz?Expires=1817092799&Signature=JgRQi2KS3Dt-dLVW3llr2SfQr2kFL9mC9t0eOjVORDglqFWGyxpy8emZkrwmYjEgx~2yG8vsQxXvzctH4wQerFjzyCcgQ~U4Gq3zpJgAtBEfkiGIC3~1YY3Mvt4L8vePEAq2m~HEFrVLQ25PWCZ9xQv0hf5cnOba~EevLVchoYgt4gLyim1CgqS~QxMtNluQ6ZoBjavtYbyeupLEGr9Q17NVxpa3PG8c-DGkXVJA3IswdoRd12F6l-s7GYw6PzodTWdx07YMMNDzZb99KBMRY0q8dedcPjvRpfqyaQK1r-uEHap27UZkL1YgB0J7PCk4ET1XiMK~6c32B3Jf1SvOHg__&Key-Pair-Id=K1NVBEPVH9LWJP",
+  "insurer": "Cigna"
+ },
+ {
+  "n": "Cigna \u00b7 national ppo",
+  "d": "3.5 MB gz",
+  "u": "https://d25kgz5rikkq4n.cloudfront.net/cost_transparency/state_mrf/CO/in-network-rates/reporting_month=2026-07/2026-07-01_CO_cigna-health-life-insurance-company_national-ppo_in-network-rates.json.gz?Expires=1817092799&Signature=ngbb2mdnZRDxJkeulOGk3wJrz0JKtTqif-GSBSjxWypeKVKNX0itqsWwNvwq7wIaY3F3h5o7Fd3iDcadZgvl1-BSkkNLvLOykpvKKLZnuCD0mHk9Q2RipnQFBtaUqFRWeHe-HFy551hrCsxyMcqlyMlu8IPmdrjhuVHtDg5v2TDSBDzhOvGyzDMfKMWOD-vBLEx0QHJtT6mTUyUm08VzvBDrI2STWL-37u63FlyyElpL4POr4FrL4f32Gjc5MzhlJ6~Ib75juMVHnu8cqcPEf9OtGwi-NatQqOSwynIJ~emJI0cOlLtl1ccP8oXaexZtNmxsI75Jt7BruF7YULvLew__&Key-Pair-Id=K1NVBEPVH9LWJP",
+  "insurer": "Cigna"
+ },
+ {
+  "n": "Anthem \u00b7 HMO CBPLMED0000",
+  "d": "0.6 MB gz",
+  "u": "https://antm-pt-prod-dataz-nogbd-nophi-us-east1.s3.amazonaws.com/comrf/2026-07-01_CO_HMO_CBPLMED0000_in-network.json.gz",
+  "insurer": "Anthem"
+ },
+ {
+  "n": "Anthem \u00b7 JBFAMED0000",
+  "d": "2.6 MB gz",
+  "u": "https://antm-pt-prod-dataz-nogbd-nophi-us-east1.s3.amazonaws.com/comrf/2026-07-01_CO_JBFAMED0000_in-network.json.gz",
+  "insurer": "Anthem"
+ },
+ {
+  "n": "Anthem \u00b7 HMO JBEWMED0000",
+  "d": "2.6 MB gz",
+  "u": "https://antm-pt-prod-dataz-nogbd-nophi-us-east1.s3.amazonaws.com/comrf/2026-07-01_CO_HMO_JBEWMED0000_in-network.json.gz",
+  "insurer": "Anthem"
+ },
+ {
+  "n": "Anthem \u00b7 HMO CCBAMED0001",
+  "d": "2.9 MB gz",
+  "u": "https://antm-pt-prod-dataz-nogbd-nophi-us-east1.s3.amazonaws.com/comrf/2026-07-01_CO_HMO_CCBAMED0001_in-network.json.gz",
+  "insurer": "Anthem"
+ },
+ {
+  "n": "Anthem \u00b7 POS PCCCMED0000",
+  "d": "4.0 MB gz",
+  "u": "https://antm-pt-prod-dataz-nogbd-nophi-us-east1.s3.amazonaws.com/comrf/2026-07-01_CO_POS_PCCCMED0000_in-network.json.gz",
+  "insurer": "Anthem"
+ },
+ {
+  "n": "Anthem \u00b7 HMO CCBAMED0000",
+  "d": "4.0 MB gz",
+  "u": "https://antm-pt-prod-dataz-nogbd-nophi-us-east1.s3.amazonaws.com/comrf/2026-07-01_CO_HMO_CCBAMED0000_in-network.json.gz",
+  "insurer": "Anthem"
+ },
+ {
+  "n": "Kaiser \u00b7 KFHP",
+  "d": "2.1 MB zip",
+  "u": "https://healthy.kaiserpermanente.org/pricing/innetwork/state/co/2026-07-01_KFHP_CO-COMMERCIAL_in-network-rates.zip",
+  "insurer": "Kaiser Permanente"
+ },
+ {
+  "n": "Kaiser \u00b7 KPIC",
+  "d": "400 KB zip",
+  "u": "https://healthy.kaiserpermanente.org/pricing/innetwork/state/co/2026-07-01_KPIC_CO-COMMERCIAL_in-network-rates.zip",
+  "insurer": "Kaiser Permanente Insurance Co"
+ },
+ {
+  "n": "Aetna \u00b7 Open Access Elect Choice \u00b7 Large Group",
+  "d": "123 KB gz",
+  "u": "https://transparency-proxy.aetna.com/v1/api/gcs/download/cost-transparency-prod-cmerittin-toc/inNetwork%252F2026-07-10_CO_Aetna_Life_Insurance_Colorado_Aetna_Open_Access_Elect_Choice_47400_in-network-rates_Large_Group.json.gz",
+  "insurer": "Aetna"
+ },
+ {
+  "n": "Aetna \u00b7 PPO \u00b7 Large Group",
+  "d": "64 KB gz",
+  "u": "https://transparency-proxy.aetna.com/v1/api/gcs/download/cost-transparency-prod-cmerittin-toc/inNetwork%252F2026-07-10_CO_Aetna_Life_Insurance_Colorado_Aetna_PPO_43103_in-network-rates_Large_Group.json.gz",
+  "insurer": "Aetna"
+ },
+ {
+  "n": "Aetna \u00b7 Open Access Managed Choice \u00b7 Large Group",
+  "d": "736 KB gz",
+  "u": "https://transparency-proxy.aetna.com/v1/api/gcs/download/cost-transparency-prod-cmerittin-toc/inNetwork%252F2026-07-10_CO_Aetna_Life_Insurance_Colorado_Aetna_Open_Access_Managed_Choice_46501_in-network-rates_Large_Group.json.gz",
+  "insurer": "Aetna"
+ },
+ {
+  "n": "Aetna \u00b7 Open Access Managed Choice \u00b7 Small Group",
+  "d": "41 KB gz",
+  "u": "https://transparency-proxy.aetna.com/v1/api/gcs/download/cost-transparency-prod-cmerittin-toc/inNetwork%252F2026-07-10_CO_Aetna_Life_Insurance_Colorado_Aetna_Open_Access_Managed_Choice_46501_in-network-rates_Small_Group.json.gz",
+  "insurer": "Aetna"
+ },
+ {
+  "n": "Aetna \u00b7 Open Access Elect Choice \u00b7 Small Group",
+  "d": "2 KB gz",
+  "u": "https://transparency-proxy.aetna.com/v1/api/gcs/download/cost-transparency-prod-cmerittin-toc/inNetwork%252F2026-07-10_CO_Aetna_Life_Insurance_Colorado_Aetna_Open_Access_Elect_Choice_47400_in-network-rates_Small_Group.json.gz",
+  "insurer": "Aetna"
+ },
+ {
+  "n": "Aetna \u00b7 PPO \u00b7 Small Group",
+  "d": "2 KB gz",
+  "u": "https://transparency-proxy.aetna.com/v1/api/gcs/download/cost-transparency-prod-cmerittin-toc/inNetwork%252F2026-07-10_CO_Aetna_Life_Insurance_Colorado_Aetna_PPO_43103_in-network-rates_Small_Group.json.gz",
+  "insurer": "Aetna"
+ },
+ {
+  "n": "Select Health \u00b7 employer group",
+  "d": "751 KB gz",
+  "u": "https://ebu.intermountainhealthcare.org/selecthealth/transparencyincoverage/MRF/S-N44A00046COX-innetwork-1.json.gz",
+  "insurer": "Select Health"
+ },
+ {
+  "n": "UnitedHealthcare \u00b7 City and County of Denver",
+  "d": "facility rates \u00b7 0.3 MB",
+  "u": "https://transparency-in-coverage.uhc.com/api/v1/uhc/blobs/download/2026-10-01/2026-10-01_United-HealthCare-Services--Inc-_Third-Party-Administrator_City-and-County-of-Denver_CSP-963-T316_in-network-rates.json.gz",
+  "insurer": "UnitedHealthcare"
+ },
+ {
+  "n": "Anthem \u00b7 HYYBMED0000",
+  "d": "29 MB",
+  "u": "https://antm-pt-prod-dataz-nogbd-nophi-us-east1.s3.amazonaws.com/comrf/2026-07-01_CO_HYYBMED0000_in-network.json.gz",
+  "insurer": "Anthem"
+ },
+ {
+  "n": "Anthem \u00b7 PPO GNCOMEDCO13",
+  "d": "29 MB",
+  "u": "https://antm-pt-prod-dataz-nogbd-nophi-us-east1.s3.amazonaws.com/comrf/2026-07-01_CO_PPO_GNCOMEDCO13_in-network.json.gz",
+  "insurer": "Anthem"
+ },
+ {
+  "n": "Anthem \u00b7 PPO GCEAMEDCO01",
+  "d": "29 MB",
+  "u": "https://antm-pt-prod-dataz-nogbd-nophi-us-east1.s3.amazonaws.com/comrf/2026-07-01_CO_PPO_GCEAMEDCO01_in-network.json.gz",
+  "insurer": "Anthem"
+ },
+ {
+  "n": "Anthem \u00b7 HXACMED0000",
+  "d": "29 MB",
+  "u": "https://antm-pt-prod-dataz-nogbd-nophi-us-east1.s3.amazonaws.com/comrf/2026-07-01_CO_HXACMED0000_in-network.json.gz",
+  "insurer": "Anthem"
+ },
+ {
+  "n": "Anthem \u00b7 EPO HYLYMED0000",
+  "d": "29 MB",
+  "u": "https://antm-pt-prod-dataz-nogbd-nophi-us-east1.s3.amazonaws.com/comrf/2026-07-01_CO_EPO_HYLYMED0000_in-network.json.gz",
+  "insurer": "Anthem"
+ },
+ {
+  "n": "Anthem \u00b7 HMO HXKCMED0000",
+  "d": "29 MB",
+  "u": "https://antm-pt-prod-dataz-nogbd-nophi-us-east1.s3.amazonaws.com/comrf/2026-07-01_CO_HMO_HXKCMED0000_in-network.json.gz",
+  "insurer": "Anthem"
+ },
+ {
+  "n": "Anthem \u00b7 HMO CCNPMED0000",
+  "d": "67 MB",
+  "u": "https://antm-pt-prod-dataz-nogbd-nophi-us-east1.s3.amazonaws.com/comrf/2026-07-01_CO_HMO_CCNPMED0000_in-network.json.gz",
+  "insurer": "Anthem"
+ },
+ {
+  "n": "Anthem \u00b7 HMO CCEXMED0000",
+  "d": "68 MB",
+  "u": "https://antm-pt-prod-dataz-nogbd-nophi-us-east1.s3.amazonaws.com/comrf/2026-07-01_CO_HMO_CCEXMED0000_in-network.json.gz",
+  "insurer": "Anthem"
+ },
+ {
+  "n": "Anthem \u00b7 PPO PCPLMED0001",
+  "d": "84 MB",
+  "u": "https://antm-pt-prod-dataz-nogbd-nophi-us-east1.s3.amazonaws.com/comrf/2026-07-01_CO_PPO_PCPLMED0001_in-network.json.gz",
+  "insurer": "Anthem"
+ },
+ {
+  "n": "UnitedHealthcare \u00b7 Children's Hospital of Colorado GSP-901",
+  "d": "3.2 MB",
+  "u": "https://transparency-in-coverage.uhc.com/api/v1/uhc/blobs/download/2026-10-01/2026-10-01_United-HealthCare-Services--Inc-_Third-Party-Administrator_Children-s-Hospital-of-Colorado_GSP-901-C365_in-network-rates.json.gz",
+  "insurer": "UnitedHealthcare"
+ },
+ {
+  "n": "UnitedHealthcare \u00b7 Children's Hospital of Colorado CSP-917",
+  "d": "3.7 MB",
+  "u": "https://transparency-in-coverage.uhc.com/api/v1/uhc/blobs/download/2026-10-01/2026-10-01_United-HealthCare-Services--Inc-_Third-Party-Administrator_Children-s-Hospital-of-Colorado_CSP-917-C866_in-network-rates.json.gz",
+  "insurer": "UnitedHealthcare"
+ },
+ {
+  "n": "UnitedHealthcare \u00b7 Children's Hospital of Colorado CSP-914",
+  "d": "7 MB",
+  "u": "https://transparency-in-coverage.uhc.com/api/v1/uhc/blobs/download/2026-10-01/2026-10-01_United-HealthCare-Services--Inc-_Third-Party-Administrator_Children-s-Hospital-of-Colorado_CSP-914-T364_in-network-rates.json.gz",
+  "insurer": "UnitedHealthcare"
+ },
+ {
+  "n": "UnitedHealthcare \u00b7 Optum behavioral health",
+  "d": "4.7 MB",
+  "u": "https://transparency-in-coverage.uhc.com/api/v1/uhc/blobs/download/2026-10-01/2026-10-01_UnitedHealthcare-of-Colorado--Inc-_Insurer_Optum-Health-Behavioral-Services--OHBS-_5_in-network-rates.json.gz",
+  "insurer": "UnitedHealthcare"
+ },
+ {
+  "n": "Cigna \u00b7 carelink national oap ntwk ii",
+  "d": "",
+  "u": "https://d25kgz5rikkq4n.cloudfront.net/cost_transparency/state_mrf/CO/in-network-rates/reporting_month=2026-01/2026-01-01_CO_cigna-health-life-insurance-company_carelink-national-oap-ntwk-ii_in-network-rates.json.gz?Expires=1801457999&Signature=RjCAiqHAxKVHB0RpAPCH3uD8YZziiZyCTHztDpeH1pEdG2tl8-GptHym1XBax3lzC6iNdyUy04oiCPXZbIBDIcaBTO0mgXxqaEBtMPwu16sdEgZw~KA-~ClpcGdWB3iFiEy86O-XyMnqvMqYVGgfg2ZrL56jFSPwA5pyE1Lq-BXhKGW20ifaPYFgH5gRpDlg02JKEpVlIFcremoqe91X48utg5vCsihoeVjCFeAfcHVvbGjV1ksIrlWKJK6Eeoc3zF0lCtZMJhK0CHX~Jb4Vs~Wgh1rXYd1cPtVW83yzOUjzvWYIjRpQ7Ek8PB0qu3kr~Bh7Gt1LGALk7rv-veOwMA__&Key-Pair-Id=K1NVBEPVH9LWJP",
+  "insurer": "Cigna"
+ },
+ {
+  "n": "Cigna \u00b7 pathwell carelink national oap mpo",
+  "d": "",
+  "u": "https://d25kgz5rikkq4n.cloudfront.net/cost_transparency/state_mrf/CO/in-network-rates/reporting_month=2026-01/2026-01-01_CO_cigna-health-life-insurance-company_pathwell-carelink-national-oap-mpo_in-network-rates.json.gz?Expires=1801457999&Signature=Qy-5IZCEd6HyULzXIbPCPvENCnHpOyvG~5A9UfDSANAvO3h7YPWbQKeRrzBeCptqV6JZOQvvnvUAY1xz-qvmmSQ~FoskY8kesVdlBXZ8sermUe6-Gw-Gw5NV5utJjf85ELgTZOh7rfxpHaE14Pr-DWPuLWoNm9Mrf3jGen6feWr43D-ilAyFpM37qmNpLVCR7WyamOYD6HG8ZWnPuwuyeeLzX8~DmdyvRsF~uztuDS2BD3t2tut3CnvdxwZz~fn51kP32o4dDCtRSmz0f2Mt7YewVwwoX53YdUUldaXXCEfMP1eCckdY0f0dkFLeWs3ifJWfHX2x51mN1u582we8eQ__&Key-Pair-Id=K1NVBEPVH9LWJP",
+  "insurer": "Cigna"
+ },
+ {
+  "n": "UnitedHealthcare \u00b7 Douglas County Government",
+  "d": "",
+  "u": "https://transparency-in-coverage.uhc.com/api/v1/uhc/blobs/download/2026-10-01/2026-10-01_United-HealthCare-Services--Inc-_Third-Party-Administrator_Douglas-County-Government_CSP-903-T304_in-network-rates.json.gz",
+  "insurer": "UnitedHealthcare"
+ }
+]

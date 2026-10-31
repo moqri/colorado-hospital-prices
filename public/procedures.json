@@ -1,0 +1,944 @@
+[
+ {
+  "c": "99203",
+  "n": "New Patient Office Visit",
+  "d": "A first visit with a doctor or clinician who has not seen you before.",
+  "k": "Visits"
+ },
+ {
+  "c": "99213",
+  "n": "Office Visit (Established Patient)",
+  "d": "A routine follow-up visit of about 20 minutes with a doctor you have seen before.",
+  "k": "Visits"
+ },
+ {
+  "c": "99214",
+  "n": "Longer Office Visit (Established Patient)",
+  "d": "A follow-up visit of about 30 minutes for more complex health problems.",
+  "k": "Visits"
+ },
+ {
+  "c": "99283",
+  "n": "Emergency Room Visit (Moderate)",
+  "d": "An emergency department visit for a problem of moderate severity.",
+  "k": "Visits"
+ },
+ {
+  "c": "99284",
+  "n": "Emergency Room Visit (Urgent)",
+  "d": "An emergency department visit for a serious problem that needs prompt care.",
+  "k": "Visits"
+ },
+ {
+  "c": "99285",
+  "n": "Emergency Room Visit (High Severity)",
+  "d": "An emergency department visit for a problem that may threaten life or function.",
+  "k": "Visits"
+ },
+ {
+  "c": "99223",
+  "n": "Hospital Admission (High Complexity)",
+  "d": "The doctor\u2019s first evaluation when you are admitted to the hospital.",
+  "k": "Visits"
+ },
+ {
+  "c": "99238",
+  "n": "Hospital Discharge Visit",
+  "d": "The doctor\u2019s visit and paperwork when you leave the hospital.",
+  "k": "Visits"
+ },
+ {
+  "c": "90837",
+  "n": "Psychotherapy (60 Minutes)",
+  "d": "A one-hour talk therapy session with a mental health professional.",
+  "k": "Mental health"
+ },
+ {
+  "c": "90791",
+  "n": "Psychiatric Evaluation",
+  "d": "An initial mental health assessment to diagnose and plan treatment.",
+  "k": "Mental health"
+ },
+ {
+  "c": "36415",
+  "n": "Blood Draw",
+  "d": "Collecting a blood sample from a vein for lab tests.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "80053",
+  "n": "Comprehensive Metabolic Panel",
+  "d": "A blood test of kidney, liver, blood sugar and electrolyte levels.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "80048",
+  "n": "Basic Metabolic Panel",
+  "d": "A blood test of kidney function, blood sugar and electrolytes.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "80061",
+  "n": "Lipid Panel (Cholesterol Test)",
+  "d": "A blood test of cholesterol and triglycerides to check heart risk.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "85025",
+  "n": "Complete Blood Count (CBC)",
+  "d": "A blood test counting red cells, white cells and platelets.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "83036",
+  "n": "Hemoglobin A1c",
+  "d": "A blood test showing average blood sugar over about three months.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "84443",
+  "n": "Thyroid Stimulating Hormone (TSH) Test",
+  "d": "A blood test to check how well the thyroid gland is working.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "84153",
+  "n": "PSA (Prostate Cancer Screening) Test",
+  "d": "A blood test used to screen for prostate problems.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "85610",
+  "n": "Prothrombin Time (PT/INR)",
+  "d": "A blood test of how quickly blood clots, often used for blood thinners.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "81001",
+  "n": "Urinalysis",
+  "d": "A urine test that checks for infection, kidney problems and other conditions.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "87635",
+  "n": "COVID-19 Test (PCR)",
+  "d": "A lab test that detects the virus that causes COVID-19.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "93000",
+  "n": "Electrocardiogram (EKG)",
+  "d": "A test that records the heart\u2019s electrical activity.",
+  "k": "Heart"
+ },
+ {
+  "c": "93306",
+  "n": "Echocardiogram (Heart Ultrasound)",
+  "d": "An ultrasound of the heart showing its size, valves and pumping.",
+  "k": "Heart"
+ },
+ {
+  "c": "93015",
+  "n": "Cardiac Stress Test",
+  "d": "Heart monitoring while you exercise or receive medicine that speeds the heart.",
+  "k": "Heart"
+ },
+ {
+  "c": "78452",
+  "n": "Nuclear Heart Stress Test",
+  "d": "A stress test using a tiny amount of radioactive tracer to image blood flow to the heart.",
+  "k": "Heart"
+ },
+ {
+  "c": "93458",
+  "n": "Cardiac Catheterization",
+  "d": "A thin tube guided to the heart to look for blocked arteries.",
+  "k": "Heart"
+ },
+ {
+  "c": "92928",
+  "n": "Heart Stent Placement",
+  "d": "Opening a blocked heart artery and leaving a small mesh tube to keep it open.",
+  "k": "Heart"
+ },
+ {
+  "c": "71046",
+  "n": "Chest X-ray (2 Views)",
+  "d": "Two X-ray pictures of the chest, often to check the lungs and heart.",
+  "k": "Imaging"
+ },
+ {
+  "c": "73030",
+  "n": "Shoulder X-ray",
+  "d": "X-ray pictures of the shoulder joint.",
+  "k": "Imaging"
+ },
+ {
+  "c": "73560",
+  "n": "Knee X-ray",
+  "d": "X-ray pictures of the knee, usually one or two views.",
+  "k": "Imaging"
+ },
+ {
+  "c": "72100",
+  "n": "Lower Back X-ray",
+  "d": "X-ray pictures of the lower spine.",
+  "k": "Imaging"
+ },
+ {
+  "c": "73090",
+  "n": "Forearm X-ray",
+  "d": "X-ray pictures of the forearm bones.",
+  "k": "Imaging"
+ },
+ {
+  "c": "70450",
+  "n": "Head CT Scan (Without Contrast)",
+  "d": "A CT scan of the head, often used after injury or for sudden headache.",
+  "k": "Imaging"
+ },
+ {
+  "c": "70551",
+  "n": "Brain MRI (Without Contrast)",
+  "d": "A magnetic scan of the brain without injected dye.",
+  "k": "Imaging"
+ },
+ {
+  "c": "70553",
+  "n": "Brain MRI (With and Without Contrast)",
+  "d": "A magnetic scan of the brain before and after injected dye.",
+  "k": "Imaging"
+ },
+ {
+  "c": "72148",
+  "n": "Lower Back MRI (Without Contrast)",
+  "d": "A magnetic scan of the lower spine without injected dye.",
+  "k": "Imaging"
+ },
+ {
+  "c": "73721",
+  "n": "Knee MRI (Without Contrast)",
+  "d": "A magnetic scan of the knee joint without injected dye.",
+  "k": "Imaging"
+ },
+ {
+  "c": "73221",
+  "n": "Shoulder MRI (Without Contrast)",
+  "d": "A magnetic scan of the shoulder without injected dye.",
+  "k": "Imaging"
+ },
+ {
+  "c": "71250",
+  "n": "Chest CT Scan (Without Contrast)",
+  "d": "A detailed CT scan of the chest without injected dye.",
+  "k": "Imaging"
+ },
+ {
+  "c": "71260",
+  "n": "Chest CT Scan (With Contrast)",
+  "d": "A detailed CT scan of the chest using injected dye.",
+  "k": "Imaging"
+ },
+ {
+  "c": "74176",
+  "n": "Abdomen and Pelvis CT Scan (Without Contrast)",
+  "d": "A CT scan of the belly and pelvis without injected dye.",
+  "k": "Imaging"
+ },
+ {
+  "c": "74177",
+  "n": "Abdomen and Pelvis CT Scan (With Contrast)",
+  "d": "A CT scan of the belly and pelvis using injected dye.",
+  "k": "Imaging"
+ },
+ {
+  "c": "74178",
+  "n": "Abdomen and Pelvis CT Scan (With and Without Contrast)",
+  "d": "A CT scan of the belly and pelvis before and after injected dye.",
+  "k": "Imaging"
+ },
+ {
+  "c": "76700",
+  "n": "Abdominal Ultrasound",
+  "d": "Sound-wave images of organs in the belly such as the liver and gallbladder.",
+  "k": "Imaging"
+ },
+ {
+  "c": "76856",
+  "n": "Pelvic Ultrasound",
+  "d": "Sound-wave images of the female pelvic organs.",
+  "k": "Imaging"
+ },
+ {
+  "c": "76805",
+  "n": "Pregnancy Ultrasound",
+  "d": "Sound-wave images of the baby and womb during pregnancy.",
+  "k": "Imaging"
+ },
+ {
+  "c": "77067",
+  "n": "Screening Mammogram",
+  "d": "A routine breast X-ray to look for early signs of cancer.",
+  "k": "Imaging"
+ },
+ {
+  "c": "77066",
+  "n": "Diagnostic Mammogram",
+  "d": "A breast X-ray to investigate a lump or an abnormal screening result.",
+  "k": "Imaging"
+ },
+ {
+  "c": "77080",
+  "n": "Bone Density Scan (DEXA)",
+  "d": "A low-dose X-ray that measures bone strength to check for osteoporosis.",
+  "k": "Imaging"
+ },
+ {
+  "c": "45378",
+  "n": "Colonoscopy (Diagnostic)",
+  "d": "A camera exam of the colon to look for polyps, cancer and bleeding.",
+  "k": "Procedures"
+ },
+ {
+  "c": "45380",
+  "n": "Colonoscopy With Biopsy",
+  "d": "A colonoscopy in which small tissue samples are taken.",
+  "k": "Procedures"
+ },
+ {
+  "c": "45385",
+  "n": "Colonoscopy With Polyp Removal",
+  "d": "A colonoscopy in which polyps are removed.",
+  "k": "Procedures"
+ },
+ {
+  "c": "43235",
+  "n": "Upper GI Endoscopy (Diagnostic)",
+  "d": "A camera exam of the esophagus, stomach and first part of the intestine.",
+  "k": "Procedures"
+ },
+ {
+  "c": "43239",
+  "n": "Upper GI Endoscopy With Biopsy",
+  "d": "An upper endoscopy in which small tissue samples are taken.",
+  "k": "Procedures"
+ },
+ {
+  "c": "52000",
+  "n": "Cystoscopy",
+  "d": "A camera exam of the bladder.",
+  "k": "Procedures"
+ },
+ {
+  "c": "62322",
+  "n": "Spinal Epidural Injection (Lower Back)",
+  "d": "Pain medicine injected near the spinal nerves in the lower back.",
+  "k": "Procedures"
+ },
+ {
+  "c": "20610",
+  "n": "Joint Injection (Large Joint)",
+  "d": "Medicine injected into a large joint such as the knee or shoulder.",
+  "k": "Procedures"
+ },
+ {
+  "c": "64483",
+  "n": "Nerve Block Injection (Lower Back)",
+  "d": "Pain medicine injected next to a spinal nerve in the lower back.",
+  "k": "Procedures"
+ },
+ {
+  "c": "96372",
+  "n": "Injection (Under the Skin or Into Muscle)",
+  "d": "A shot given by a nurse or clinician.",
+  "k": "Procedures"
+ },
+ {
+  "c": "96365",
+  "n": "IV Infusion (First Hour)",
+  "d": "Medicine or fluids given through a vein for up to an hour.",
+  "k": "Procedures"
+ },
+ {
+  "c": "12001",
+  "n": "Simple Wound Repair (Stitches)",
+  "d": "Closing a small, shallow cut with stitches or glue.",
+  "k": "Procedures"
+ },
+ {
+  "c": "10060",
+  "n": "Abscess Drainage",
+  "d": "Opening and draining a pocket of infection under the skin.",
+  "k": "Procedures"
+ },
+ {
+  "c": "11042",
+  "n": "Wound Cleaning (Debridement)",
+  "d": "Removing dead or damaged tissue from a wound.",
+  "k": "Procedures"
+ },
+ {
+  "c": "25605",
+  "n": "Broken Wrist or Forearm Treatment",
+  "d": "Setting a broken bone near the wrist without surgery.",
+  "k": "Bones and joints"
+ },
+ {
+  "c": "27236",
+  "n": "Hip Fracture Repair",
+  "d": "Surgery to repair a broken upper thigh bone near the hip.",
+  "k": "Bones and joints"
+ },
+ {
+  "c": "27447",
+  "n": "Total Knee Replacement",
+  "d": "Surgery that replaces a worn knee joint with an artificial one.",
+  "k": "Bones and joints"
+ },
+ {
+  "c": "27130",
+  "n": "Total Hip Replacement",
+  "d": "Surgery that replaces a worn hip joint with an artificial one.",
+  "k": "Bones and joints"
+ },
+ {
+  "c": "29881",
+  "n": "Knee Arthroscopy (Meniscus Repair)",
+  "d": "A camera-guided surgery to trim or repair torn knee cartilage.",
+  "k": "Bones and joints"
+ },
+ {
+  "c": "29827",
+  "n": "Shoulder Arthroscopy (Rotator Cuff Repair)",
+  "d": "A camera-guided surgery to repair a torn shoulder tendon.",
+  "k": "Bones and joints"
+ },
+ {
+  "c": "63030",
+  "n": "Lumbar Disc Surgery (Discectomy)",
+  "d": "Surgery to remove part of a herniated disc pressing on a nerve in the lower back.",
+  "k": "Bones and joints"
+ },
+ {
+  "c": "97110",
+  "n": "Physical Therapy (Exercise)",
+  "d": "A therapist-guided exercise session to build strength and movement.",
+  "k": "Rehab"
+ },
+ {
+  "c": "47562",
+  "n": "Gallbladder Removal (Laparoscopic)",
+  "d": "Camera-guided surgery to remove the gallbladder through small cuts.",
+  "k": "Surgery"
+ },
+ {
+  "c": "44970",
+  "n": "Appendix Removal (Laparoscopic)",
+  "d": "Camera-guided surgery to remove the appendix through small cuts.",
+  "k": "Surgery"
+ },
+ {
+  "c": "49505",
+  "n": "Hernia Repair (Groin)",
+  "d": "Surgery to repair a bulge in the groin where tissue pushes through the muscle.",
+  "k": "Surgery"
+ },
+ {
+  "c": "42820",
+  "n": "Tonsil Removal (Child)",
+  "d": "Surgery to remove the tonsils and adenoids in a child under 12.",
+  "k": "Surgery"
+ },
+ {
+  "c": "66984",
+  "n": "Cataract Surgery With Lens Implant",
+  "d": "Removing a clouded eye lens and replacing it with an artificial one.",
+  "k": "Surgery"
+ },
+ {
+  "c": "58571",
+  "n": "Hysterectomy (Laparoscopic)",
+  "d": "Camera-guided surgery to remove the uterus.",
+  "k": "Surgery"
+ },
+ {
+  "c": "19120",
+  "n": "Breast Lump Removal",
+  "d": "Surgery to remove a lump or abnormal area from the breast.",
+  "k": "Surgery"
+ },
+ {
+  "c": "19303",
+  "n": "Mastectomy",
+  "d": "Surgery to remove breast tissue.",
+  "k": "Surgery"
+ },
+ {
+  "c": "33533",
+  "n": "Heart Bypass Surgery (Single Artery)",
+  "d": "Open-heart surgery that reroutes blood around a blocked heart artery.",
+  "k": "Surgery"
+ },
+ {
+  "c": "59400",
+  "n": "Vaginal Delivery (Full Care)",
+  "d": "Pregnancy care, vaginal delivery and care after birth.",
+  "k": "Pregnancy"
+ },
+ {
+  "c": "59510",
+  "n": "Cesarean Delivery (Full Care)",
+  "d": "Pregnancy care, delivery by cesarean section and care after birth.",
+  "k": "Pregnancy"
+ },
+ {
+  "c": "59025",
+  "n": "Fetal Non-Stress Test",
+  "d": "Monitoring the baby\u2019s heart rate during pregnancy.",
+  "k": "Pregnancy"
+ },
+ {
+  "c": "90471",
+  "n": "Vaccine Administration",
+  "d": "Giving a vaccine shot (the vaccine itself is billed separately).",
+  "k": "Prevention"
+ },
+ {
+  "c": "73610",
+  "n": "Ankle X-ray",
+  "d": "Pictures of the ankle bones to look for breaks or injury.",
+  "k": "Imaging"
+ },
+ {
+  "c": "73630",
+  "n": "Foot X-ray",
+  "d": "Pictures of the foot bones to look for breaks or injury.",
+  "k": "Imaging"
+ },
+ {
+  "c": "73562",
+  "n": "Knee X-ray (3 views)",
+  "d": "Pictures of the knee bones from three angles.",
+  "k": "Imaging"
+ },
+ {
+  "c": "73564",
+  "n": "Knee X-ray (4 or more views)",
+  "d": "A fuller set of knee pictures, often for arthritis or injury.",
+  "k": "Imaging"
+ },
+ {
+  "c": "73110",
+  "n": "Wrist X-ray",
+  "d": "Pictures of the wrist bones to look for breaks or injury.",
+  "k": "Imaging"
+ },
+ {
+  "c": "73130",
+  "n": "Hand X-ray",
+  "d": "Pictures of the hand bones to look for breaks or injury.",
+  "k": "Imaging"
+ },
+ {
+  "c": "73080",
+  "n": "Elbow X-ray",
+  "d": "Pictures of the elbow bones.",
+  "k": "Imaging"
+ },
+ {
+  "c": "73502",
+  "n": "Hip X-ray",
+  "d": "Pictures of one hip, 2 to 3 views.",
+  "k": "Imaging"
+ },
+ {
+  "c": "72170",
+  "n": "Pelvis X-ray",
+  "d": "A picture of the hip bones and pelvis.",
+  "k": "Imaging"
+ },
+ {
+  "c": "72040",
+  "n": "Neck spine X-ray",
+  "d": "Pictures of the neck bones, 2 to 3 views.",
+  "k": "Imaging"
+ },
+ {
+  "c": "71045",
+  "n": "Chest X-ray (1 view)",
+  "d": "A single picture of the lungs and heart.",
+  "k": "Imaging"
+ },
+ {
+  "c": "76830",
+  "n": "Transvaginal ultrasound",
+  "d": "An ultrasound of the uterus and ovaries using a small probe.",
+  "k": "Imaging"
+ },
+ {
+  "c": "76817",
+  "n": "Pregnancy ultrasound (transvaginal)",
+  "d": "An early pregnancy ultrasound using a small probe.",
+  "k": "Pregnancy"
+ },
+ {
+  "c": "76801",
+  "n": "Pregnancy ultrasound (before 14 weeks)",
+  "d": "An early ultrasound of a single baby.",
+  "k": "Pregnancy"
+ },
+ {
+  "c": "76705",
+  "n": "Abdominal ultrasound (limited)",
+  "d": "An ultrasound of part of the belly.",
+  "k": "Imaging"
+ },
+ {
+  "c": "77063",
+  "n": "3D mammogram add-on (screening)",
+  "d": "The 3D part of a breast screening exam.",
+  "k": "Imaging"
+ },
+ {
+  "c": "77065",
+  "n": "Diagnostic mammogram (one breast)",
+  "d": "A closer breast X-ray after a finding or symptom.",
+  "k": "Imaging"
+ },
+ {
+  "c": "71275",
+  "n": "CT scan of chest blood vessels",
+  "d": "A CT scan with dye to look at vessels in the chest.",
+  "k": "Imaging"
+ },
+ {
+  "c": "93010",
+  "n": "ECG reading",
+  "d": "A doctor reading a heart rhythm tracing.",
+  "k": "Heart"
+ },
+ {
+  "c": "93005",
+  "n": "ECG recording",
+  "d": "The heart rhythm tracing itself.",
+  "k": "Heart"
+ },
+ {
+  "c": "99204",
+  "n": "New patient office visit (45 min)",
+  "d": "A longer first visit with a doctor.",
+  "k": "Visits"
+ },
+ {
+  "c": "99205",
+  "n": "New patient office visit (60 min)",
+  "d": "A long first visit for a complex problem.",
+  "k": "Visits"
+ },
+ {
+  "c": "99202",
+  "n": "New patient office visit (20 min)",
+  "d": "A short first visit with a doctor.",
+  "k": "Visits"
+ },
+ {
+  "c": "99212",
+  "n": "Established patient visit (10 min)",
+  "d": "A brief follow-up visit.",
+  "k": "Visits"
+ },
+ {
+  "c": "99215",
+  "n": "Established patient visit (40 min)",
+  "d": "A long follow-up visit for a complex problem.",
+  "k": "Visits"
+ },
+ {
+  "c": "99211",
+  "n": "Established patient visit (5 min)",
+  "d": "A very brief visit, often with a nurse.",
+  "k": "Visits"
+ },
+ {
+  "c": "99396",
+  "n": "Yearly checkup (ages 40 to 64)",
+  "d": "A preventive exam for an existing patient.",
+  "k": "Prevention"
+ },
+ {
+  "c": "99395",
+  "n": "Yearly checkup (ages 18 to 39)",
+  "d": "A preventive exam for an existing patient.",
+  "k": "Prevention"
+ },
+ {
+  "c": "99291",
+  "n": "Critical care (first hour)",
+  "d": "Intensive care for a life-threatening condition.",
+  "k": "Visits"
+ },
+ {
+  "c": "99282",
+  "n": "Emergency room visit (lower)",
+  "d": "An emergency visit for a minor problem.",
+  "k": "Visits"
+ },
+ {
+  "c": "99281",
+  "n": "Emergency room visit (minimal)",
+  "d": "An emergency visit needing little care.",
+  "k": "Visits"
+ },
+ {
+  "c": "90834",
+  "n": "Therapy session (45 min)",
+  "d": "Talk therapy with a licensed therapist.",
+  "k": "Mental health"
+ },
+ {
+  "c": "90832",
+  "n": "Therapy session (30 min)",
+  "d": "A shorter talk therapy session.",
+  "k": "Mental health"
+ },
+ {
+  "c": "90853",
+  "n": "Group therapy",
+  "d": "Therapy in a group setting.",
+  "k": "Mental health"
+ },
+ {
+  "c": "90792",
+  "n": "Psychiatric evaluation with medical services",
+  "d": "A first mental health assessment with a psychiatrist.",
+  "k": "Mental health"
+ },
+ {
+  "c": "90715",
+  "n": "Tdap vaccine",
+  "d": "Protects against tetanus, diphtheria and whooping cough.",
+  "k": "Prevention"
+ },
+ {
+  "c": "90677",
+  "n": "Pneumonia vaccine (PCV20)",
+  "d": "Protects against pneumococcal disease.",
+  "k": "Prevention"
+ },
+ {
+  "c": "90750",
+  "n": "Shingles vaccine",
+  "d": "Protects against shingles.",
+  "k": "Prevention"
+ },
+ {
+  "c": "90651",
+  "n": "HPV vaccine",
+  "d": "Protects against human papillomavirus.",
+  "k": "Prevention"
+ },
+ {
+  "c": "87880",
+  "n": "Strep throat test (rapid)",
+  "d": "A quick swab test for strep.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "87804",
+  "n": "Flu test (rapid)",
+  "d": "A quick swab test for influenza.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "87637",
+  "n": "COVID, flu and RSV test",
+  "d": "A single test for three respiratory viruses.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "87491",
+  "n": "Chlamydia test",
+  "d": "A lab test for chlamydia.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "87591",
+  "n": "Gonorrhea test",
+  "d": "A lab test for gonorrhea.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "81003",
+  "n": "Urine test (automated)",
+  "d": "A basic urine check.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "82306",
+  "n": "Vitamin D level",
+  "d": "A blood test for vitamin D.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "85018",
+  "n": "Hemoglobin",
+  "d": "A blood test for anemia.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "85027",
+  "n": "Complete blood count (CBC)",
+  "d": "A blood test counting red cells, white cells and platelets.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "86140",
+  "n": "C-reactive protein (CRP)",
+  "d": "A blood test for inflammation.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "84439",
+  "n": "Free thyroxine (T4)",
+  "d": "A blood test for thyroid function.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "82728",
+  "n": "Ferritin",
+  "d": "A blood test for stored iron.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "88305",
+  "n": "Tissue exam by pathologist",
+  "d": "A lab doctor examines a tissue sample, such as a biopsy.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "86900",
+  "n": "Blood type (ABO)",
+  "d": "A test for your blood group.",
+  "k": "Lab tests"
+ },
+ {
+  "c": "20611",
+  "n": "Joint injection with ultrasound",
+  "d": "A needle into a large joint, guided by ultrasound.",
+  "k": "Bones and joints"
+ },
+ {
+  "c": "20553",
+  "n": "Trigger point injections",
+  "d": "Injections into tender muscle knots.",
+  "k": "Bones and joints"
+ },
+ {
+  "c": "64493",
+  "n": "Spine joint injection (lower back)",
+  "d": "A numbing or steroid shot near a spine joint.",
+  "k": "Bones and joints"
+ },
+ {
+  "c": "62321",
+  "n": "Epidural steroid injection (neck or upper back)",
+  "d": "A steroid shot near spinal nerves, guided by imaging.",
+  "k": "Bones and joints"
+ },
+ {
+  "c": "97140",
+  "n": "Manual therapy",
+  "d": "Hands-on treatment such as joint or soft tissue work.",
+  "k": "Rehab"
+ },
+ {
+  "c": "97112",
+  "n": "Neuromuscular re-education",
+  "d": "Exercises to retrain balance and movement.",
+  "k": "Rehab"
+ },
+ {
+  "c": "97530",
+  "n": "Therapeutic activities",
+  "d": "Hands-on exercises to restore daily function.",
+  "k": "Rehab"
+ },
+ {
+  "c": "92557",
+  "n": "Hearing test (comprehensive)",
+  "d": "A full hearing test.",
+  "k": "Procedures"
+ },
+ {
+  "c": "92552",
+  "n": "Hearing test (pure tone)",
+  "d": "A basic hearing test.",
+  "k": "Procedures"
+ },
+ {
+  "c": "95806",
+  "n": "Home sleep test",
+  "d": "A sleep apnea test done without an overnight stay.",
+  "k": "Procedures"
+ },
+ {
+  "c": "94010",
+  "n": "Breathing test (spirometry)",
+  "d": "A test of how much air you can breathe out.",
+  "k": "Procedures"
+ },
+ {
+  "c": "31231",
+  "n": "Nasal endoscopy",
+  "d": "A thin camera looks inside the nose.",
+  "k": "Procedures"
+ },
+ {
+  "c": "31575",
+  "n": "Laryngoscopy",
+  "d": "A thin camera looks at the voice box.",
+  "k": "Procedures"
+ },
+ {
+  "c": "G0121",
+  "n": "Colon cancer screening (average risk)",
+  "d": "A colonoscopy for people at normal risk.",
+  "k": "Prevention"
+ },
+ {
+  "c": "17110",
+  "n": "Wart removal (up to 14)",
+  "d": "Destroying common warts.",
+  "k": "Procedures"
+ },
+ {
+  "c": "17000",
+  "n": "Precancerous skin spot removal",
+  "d": "Destroying a skin spot that could turn into cancer.",
+  "k": "Procedures"
+ },
+ {
+  "c": "11750",
+  "n": "Nail removal",
+  "d": "Removing a nail and its base, often for ingrown nails.",
+  "k": "Procedures"
+ },
+ {
+  "c": "96413",
+  "n": "Chemotherapy infusion (first hour)",
+  "d": "An IV chemotherapy drug given over the first hour.",
+  "k": "Procedures"
+ },
+ {
+  "c": "99233",
+  "n": "Hospital follow-up visit (high)",
+  "d": "A daily hospital visit by a doctor for a complex problem.",
+  "k": "Visits"
+ },
+ {
+  "c": "99232",
+  "n": "Hospital follow-up visit (moderate)",
+  "d": "A daily hospital visit by a doctor.",
+  "k": "Visits"
+ }
+]
