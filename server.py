@@ -235,7 +235,7 @@ def api(path, q):
             if s:
                 where += ' AND (lower(k) LIKE ? OR lower(descr) LIKE ?)'
                 args += ['%' + s + '%', '%' + s + '%']
-            lim = 100000 if g('all') == '1' else 400
+            lim = 100000 if g('all') == '1' else 100
             total = c.execute('SELECT COUNT(DISTINCT k) FROM pss ' + where, args).fetchone()[0]
             ks = [dict(r) for r in c.execute('SELECT k,MAX(descr) descr,COUNT(*) have FROM pss %s GROUP BY k ORDER BY have DESC, k LIMIT ?' % where, args + [lim])]
         cells = {}
